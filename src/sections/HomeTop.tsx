@@ -224,14 +224,14 @@ export function AboutSplit() {
             className="aspect-[4/5] w-full rounded-[28px]"
             parallax={5}
           />
-          <div className="absolute -right-4 -bottom-10 hidden w-56 md:block lg:-right-12">
+          {/* <div className="absolute -right-4 -bottom-10 hidden w-56 md:block lg:-right-12">
             <MaskImage
               src={MEDIA.labStudent}
               alt="Medical student in laboratory"
               className="aspect-[4/5] w-full rounded-[22px] border-8 border-white shadow-[0_30px_70px_-30px_rgba(17,24,39,0.4)]"
               delay={0.25}
             />
-          </div>
+          </div> */}
           <Reveal delay={0.4}>
             <div className="absolute -top-6 -left-4 rounded-2xl border border-ink/[0.07] bg-white/90 px-6 py-5 shadow-[0_24px_60px_-30px_rgba(17,24,39,0.45)] backdrop-blur lg:-left-10">
               <p className="font-display text-[2.2rem] leading-none font-semibold text-brand">
