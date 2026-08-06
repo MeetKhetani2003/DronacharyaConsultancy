@@ -1,5 +1,5 @@
 "use client";
-import { CheckCircle2 } from "lucide-react";
+import { Calendar, CheckCircle2 } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import { Btn, MaskImage, Reveal, Section, SectionHead, Stagger, StaggerItem } from "@/components/ui";
 import { COUNTRIES, MEDIA, UNIVERSITIES } from "@/data/content";
@@ -357,6 +357,151 @@ export function FaqPage() {
         image={MEDIA.seminar2}
       />
       <Faq />
+      <FinalCta />
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+
+export function EventsPage() {
+  return (
+    <>
+      <PageHero
+        crumb="Events"
+        eyebrow="Seminars & Workshops"
+        title="Meet our experts in your city."
+        highlight="experts"
+        sub="Join our upcoming seminars for direct interactions with university delegates and our senior counsellors."
+        image={MEDIA.seminar1}
+      />
+      
+      <Section className="bg-mist">
+        <div className="container-x max-w-3xl text-center">
+          <SectionHead eyebrow="Schedule" title="Upcoming Events" align="center" />
+          <Reveal delay={0.15}>
+            <div className="mt-14 rounded-3xl border border-ink/[0.07] bg-white p-12 shadow-sm">
+              <div className="flex flex-col items-center justify-center gap-4">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-mist text-brand">
+                  <Calendar className="h-8 w-8" />
+                </div>
+                <h3 className="font-display text-xl font-medium text-ink">No upcoming events right now</h3>
+                <p className="text-center text-[14.5px] leading-relaxed font-semibold text-ink">
+                  We are currently planning our next schedule of seminars. Check back later or contact us directly to arrange a free one-on-one counselling session.
+                </p>
+                <div className="mt-4">
+                  <Btn to="/contact" variant="primary">
+                    Book Free Counselling
+                  </Btn>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+      
+      <FinalCta />
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+
+export function NextPage() {
+  return (
+    <>
+      <PageHero
+        crumb="NExT"
+        eyebrow="Medical Licensing"
+        title="Prepare for the National Exit Test."
+        highlight="National Exit Test"
+        sub="Comprehensive guidance and resources for medical graduates."
+        image={MEDIA.labScientist}
+      />
+      <Section className="bg-white">
+        <div className="container-x py-20 text-center">
+          <h2 className="font-display text-2xl font-medium text-ink">NExT details coming soon.</h2>
+        </div>
+      </Section>
+      <FinalCta />
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+
+export function CoachingPage() {
+  return (
+    <>
+      <PageHero
+        crumb="Coaching"
+        eyebrow="Dronacharya Academy"
+        title="Expert coaching for medical aspirants."
+        highlight="Expert coaching"
+        image={MEDIA.counselling2}
+      />
+      <Section className="bg-white">
+        <div className="container-x py-20 text-center">
+          <h2 className="font-display text-2xl font-medium text-ink">Coaching details coming soon.</h2>
+        </div>
+      </Section>
+      <FinalCta />
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+
+export function SchoolCollegePage() {
+  return (
+    <>
+      <PageHero
+        crumb="Our Institutions"
+        eyebrow="Education Network"
+        title="Dronacharya Schools & College."
+        highlight="Schools"
+        image={MEDIA.campusWalk}
+      />
+      <Section className="bg-mist">
+        <div className="container-x">
+          <SectionHead eyebrow="Our Network" title="Institutions of Excellence" align="center" />
+          <Stagger className="mt-14 grid gap-6 md:grid-cols-3">
+            <StaggerItem className="h-full">
+              <div className="card-lift flex h-full flex-col justify-between rounded-3xl border border-ink/[0.07] bg-white p-8 text-center">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-mist text-brand">
+                    <CheckCircle2 className="h-8 w-8" />
+                  </div>
+                  <h3 className="font-display text-[18px] font-medium text-ink">Dronacharya Global School</h3>
+                  <p className="text-[13.5px] font-semibold text-ink">Address: Dronacharya Global School, Harni Mahadev Main Road, Bhilwara.</p>
+                </div>
+              </div>
+            </StaggerItem>
+            <StaggerItem className="h-full">
+              <div className="card-lift flex h-full flex-col justify-between rounded-3xl border border-ink/[0.07] bg-white p-8 text-center">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-mist text-brand">
+                    <CheckCircle2 className="h-8 w-8" />
+                  </div>
+                  <h3 className="font-display text-[18px] font-medium text-ink">Little Ducklings School</h3>
+                  <p className="text-[13.5px] font-semibold text-ink">Address: 4-A-8, Sector 4, R.C. Vyas Colony, Bhilwara.</p>
+                </div>
+              </div>
+            </StaggerItem>
+            <StaggerItem className="h-full">
+              <div className="card-lift flex h-full flex-col justify-between rounded-3xl border border-ink/[0.07] bg-white p-8 text-center">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-mist text-brand">
+                    <CheckCircle2 className="h-8 w-8" />
+                  </div>
+                  <h3 className="font-display text-[18px] font-medium text-ink">College - Dronacharya</h3>
+                  <p className="text-[13.5px] font-semibold text-ink">Premier education and facilities.</p>
+                </div>
+              </div>
+            </StaggerItem>
+          </Stagger>
+        </div>
+      </Section>
       <FinalCta />
     </>
   );

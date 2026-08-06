@@ -1,6 +1,6 @@
 "use client";
 import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { ArrowUpRight, Mail, Menu, Phone, X } from "lucide-react";
+import { ArrowUpRight, Calendar, Mail, Menu, Phone, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Btn, Logo } from "@/components/ui";
@@ -45,15 +45,18 @@ export default function Navbar() {
       >
         <div className="container-x flex items-center justify-between">
           <p className="tracking-[0.14em] uppercase">
-            Rajasthan’s trusted medical admission desk · Est. {BUSINESS.since}
+            Rajasthan's Oldest Admission Consultancy Since 2003
           </p>
           <div className="flex items-center gap-7">
+            <button onClick={() => router.push("/events")} className="flex items-center gap-2 transition hover:text-white">
+              <Calendar className="h-3.5 w-3.5 text-brand" /> Event
+            </button>
             <a href={BUSINESS.phoneHref} className="flex items-center gap-2 transition hover:text-white">
               <Phone className="h-3.5 w-3.5 text-brand" /> {BUSINESS.phone}
             </a>
-            <a href={`mailto:${BUSINESS.email}`} className="flex items-center gap-2 transition hover:text-white">
+            <div className="flex items-center gap-2">
               <Mail className="h-3.5 w-3.5 text-brand" /> {BUSINESS.email}
-            </a>
+            </div>
           </div>
         </div>
       </div>

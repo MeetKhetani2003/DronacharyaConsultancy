@@ -10,14 +10,14 @@ export const BUSINESS = {
   tagline: "Admission Consultancy",
   since: 2003,
   legacyLine: "Since : 2003",
-  phone: "+91 98285 74747",
-  phoneHref: "tel:+919828574747",
-  whatsapp: "https://wa.me/919828574747",
+  phone: "+91 98290 92225",
+  phoneHref: "tel:+919829092225",
+  whatsapp: "https://wa.me/919610068666",
   email: "info@dronacharya.org",
   admissionsEmail: "admissions@dronacharya.org",
   website: "dronacharya.org",
-  addressLine1: "Dronacharya Group, Lokpida Complex",
-  addressLine2: "Love Garden Road, R.C. Vyas Colony",
+  addressLine1: "Dronacharya Global School, Harni Mahadev Road",
+  addressLine2: "Near Bramha Kumari Ashram, Panchwati",
   addressLine3: "Bhilwara, Rajasthan – 311001, India",
   hours: [
     { day: "Monday – Saturday", time: "9:30 AM – 7:30 PM" },
@@ -30,7 +30,7 @@ export const BUSINESS = {
 export const MEDIA = {
   heroVideo: "https://videos.pexels.com/video-files/36878014/15622413_3840_2160_60fps.mp4",
   heroVideoAlt: "https://videos.pexels.com/video-files/36879537/15622868_3840_2160_60fps.mp4",
-  heroPoster: "/media/image-1.jpeg",
+  heroPoster: "/media/image-2.jpeg",
   labVideo: "/media/video-3.mp4",
   campusWalk: "/media/image-2.jpeg",
   campusFriends: "/media/image-3.jpeg",
@@ -57,7 +57,7 @@ export const MEDIA = {
   newspaper1: "/media/image-24.jpeg",
   newspaper2: "/media/image-25.jpeg",
   newspaper3: "/media/image-26.jpeg",
-  newspaper4: "/media/image-1.jpeg",
+
   uni1: "/media/image-2.jpeg",
   uni2: "/media/image-3.jpeg",
   uni3: "/media/image-4.jpeg",
@@ -119,7 +119,7 @@ export const TIMELINE = [
   {
     year: "2019",
     title: "International Admissions Network",
-    text: "Direct representation with universities across Russia, Georgia, Kazakhstan, Bangladesh, the Philippines, Germany and Mauritius.",
+    text: "Direct representation with universities across Georgia, Kazakhstan, Bangladesh, the Philippines, Germany and Mauritius.",
   },
   {
     year: "Today",
@@ -176,19 +176,6 @@ export const COUNTRIES: Country[] = [
     medium: "English",
     highlight: "Government, Private, Deemed & Minority quota admissions through AIQ and state counselling.",
     intake: "Aug – Oct",
-  },
-  {
-    name: "Russia",
-    flag: "🇷🇺",
-    image:
-      "https://images.pexels.com/photos/5999987/pexels-photo-5999987.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
-    fees: "₹18 – 28 Lakh (Total)",
-    duration: "6 Years",
-    eligibility: "NEET Qualified • 50% in PCB",
-    recognition: "NMC | WHO | WDOMS",
-    medium: "English",
-    highlight: "Federal universities with a century of medical heritage and world-class clinical exposure.",
-    intake: "Sep – Nov",
   },
   {
     name: "Georgia",
@@ -293,8 +280,6 @@ export const SERVICES = [
 ];
 
 export const UNIVERSITIES = [
-  { name: "Kazan Federal University", country: "Russia", flag: "🇷🇺", rank: "World Rank #395", recognition: "NMC • WHO • WDOMS", fees: "$5,500 / year", image: MEDIA.uni1 },
-  { name: "Bashkir State Medical University", country: "Russia", flag: "🇷🇺", rank: "Est. 1932", recognition: "NMC • WHO • FAIMER", fees: "$4,800 / year", image: MEDIA.uni7 },
   { name: "Tbilisi State Medical University", country: "Georgia", flag: "🇬🇪", rank: "Georgia Rank #1", recognition: "NMC • WFME • WHO", fees: "$8,000 / year", image: MEDIA.uni2 },
   { name: "Batumi Shota Rustaveli State University", country: "Georgia", flag: "🇬🇪", rank: "Est. 1935", recognition: "NMC • WHO • ECFMG", fees: "$6,500 / year", image: MEDIA.uni3 },
   { name: "Kazakh National Medical University", country: "Kazakhstan", flag: "🇰🇿", rank: "Kazakhstan Rank #1", recognition: "NMC • WHO • WDOMS", fees: "$4,200 / year", image: MEDIA.uni6 },
@@ -310,13 +295,6 @@ export const SCHOLARSHIPS = [
     eligibility: "NEET score 500+ with 85% in Class XII (PCB)",
     benefits: ["Tuition waiver in first year", "Free documentation & apostille", "Priority university allotment"],
     process: "Submit NEET scorecard and marksheets — the panel reviews within 72 hours.",
-  },
-  {
-    title: "Girl Child Excellence Grant",
-    amount: "Up to ₹1,50,000",
-    eligibility: "Female aspirants qualifying NEET in the current attempt",
-    benefits: ["Hostel fee subsidy", "Free travel & insurance support", "Dedicated women's safety mentor abroad"],
-    process: "Automatic evaluation on application — no separate form required.",
   },
   {
     title: "Early Bird Advantage",
@@ -335,12 +313,12 @@ export const SCHOLARSHIPS = [
 ];
 
 export const TESTIMONIALS = [
-  { name: "Dr. Ayushi Sharma", role: "MBBS Graduate • Tbilisi State Medical University", city: "Bhilwara, Rajasthan", quote: "My NEET score was borderline and every other consultant told me to repeat a year. Dronacharya mapped a Georgia plan in one sitting, handled every document, and today I am a practising doctor.", image: MEDIA.student2, rating: 5 },
-  { name: "Dr. Rohit Jain", role: "Final Year • Bashkir State Medical University", role2: "Russia", city: "Udaipur, Rajasthan", quote: "From visa to hostel to my first winter jacket — Sir personally checked in every month. My parents never once felt I was 4,000 km away.", image: MEDIA.student1, rating: 5 },
-  { name: "Mr. Suresh Agarwal", role: "Parent of MBBS Student", city: "Chittorgarh, Rajasthan", quote: "They gave us a written fee structure with no hidden charges. For a middle-class family sending a daughter abroad, that transparency was everything.", image: MEDIA.student3, rating: 5 },
-  { name: "Dr. Priyanka Vyas", role: "FMGE Qualified • Kazakh National Medical University", city: "Ajmer, Rajasthan", quote: "The FMGE coaching roadmap started in my second year. I cleared in my first attempt — that preparation began at Dronacharya's desk.", image: MEDIA.student6, rating: 5 },
-  { name: "Aditya Mehta", role: "MBBS 2nd Year • Deemed University, India", city: "Kota, Rajasthan", quote: "Their choice-filling strategy in MCC Round 2 got me a deemed seat almost ₹8 lakh cheaper than what I expected to pay.", image: MEDIA.student4, rating: 5 },
-  { name: "Dr. Neha & Dr. Karan", role: "Siblings • MBBS Philippines", city: "Jaipur, Rajasthan", quote: "Two admissions, two years apart, same team, same care. That consistency is why our whole extended family now comes here.", image: MEDIA.student5, rating: 5 },
+  { name: "Updated Testimonial 1", role: "MBBS Graduate", city: "Bhilwara", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student2, rating: 5 },
+  { name: "Updated Testimonial 2", role: "Final Year Student", city: "Udaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student1, rating: 5 },
+  { name: "Updated Testimonial 3", role: "Parent", city: "Chittorgarh", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student3, rating: 5 },
+  { name: "Updated Testimonial 4", role: "FMGE Qualified", city: "Ajmer", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student6, rating: 5 },
+  { name: "Updated Testimonial 5", role: "MBBS 2nd Year", city: "Kota", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student4, rating: 5 },
+  { name: "Updated Testimonial 6", role: "Siblings", city: "Jaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student5, rating: 5 },
 ];
 
 export const SUCCESS_STORIES = [
@@ -358,7 +336,6 @@ export const NEWSPAPERS = [
   { title: "23 Years of Guiding Medical Aspirants", paper: "Rajasthan Patrika", date: "March 2025", image: MEDIA.newspaper1 },
   { title: "Bhilwara Students Shine in MBBS Abroad", paper: "Dainik Bhaskar", date: "August 2024", image: MEDIA.newspaper2 },
   { title: "Free NEET Counselling Camp Draws 1200 Families", paper: "Dainik Navajyoti", date: "June 2024", image: MEDIA.newspaper3 },
-  { title: "Dronacharya Felicitates Returning Doctors", paper: "Rajasthan Patrika", date: "January 2024", image: MEDIA.newspaper4 },
 ];
 
 export const NEWS = [
@@ -434,7 +411,7 @@ export const GALLERY = [
   { src: MEDIA.seminar6, category: "Events", title: "Pre-Departure Briefing" },
   { src: MEDIA.campusGroup, category: "Students", title: "Send-off Ceremony" },
   { src: MEDIA.counselling4, category: "Admissions", title: "Visa Filing Support" },
-  { src: MEDIA.newspaper4, category: "Newspapers", title: "Felicitation Coverage" },
+
   { src: MEDIA.seminar7, category: "Seminars", title: "Medical Education Summit" },
   { src: MEDIA.gradBW, category: "Achievements", title: "Alumni Convocation" },
 ];
@@ -480,13 +457,15 @@ export const NAV: { label: string; href: string; children?: { label: string; hre
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   {
-    label: "MBBS",
-    href: "/mbbs-india",
+    label: "Courses",
+    href: "#",
     children: [
-      { label: "MBBS in India", href: "/mbbs-india", desc: "Government, private & deemed counselling" },
-      { label: "MBBS Abroad", href: "/mbbs-abroad", desc: "8 countries, NMC-recognised universities" },
-      { label: "Countries", href: "/countries", desc: "Fees, duration, eligibility compared" },
-      { label: "Universities", href: "/universities", desc: "Partner campuses & rankings" },
+      { label: "MBBS", href: "/mbbs-india", desc: "Government, private & deemed" },
+      { label: "MBBS Abroad", href: "/mbbs-abroad", desc: "NMC-recognised universities" },
+      { label: "MBA", href: "#", desc: "Top management colleges" },
+      { label: "B.Tech", href: "#", desc: "Engineering & Technology" },
+      { label: "BBA", href: "#", desc: "Business Administration" },
+      { label: "Other Healthcare Courses", href: "#", desc: "Allied medical courses" },
     ],
   },
   {
@@ -501,5 +480,14 @@ export const NAV: { label: string; href: string; children?: { label: string; hre
   },
   { label: "Gallery", href: "/gallery" },
   { label: "FAQ", href: "/faq" },
+  {
+    label: "More",
+    href: "#",
+    children: [
+      { label: "NExT", href: "/next", desc: "Medical Licensing Exam" },
+      { label: "Coaching", href: "/coaching", desc: "Dronacharya Coaching" },
+      { label: "Our School & College", href: "/school-college", desc: "Dronacharya Global School" },
+    ],
+  },
   { label: "Contact", href: "/contact" },
 ];

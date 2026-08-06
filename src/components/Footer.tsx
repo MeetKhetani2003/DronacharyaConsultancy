@@ -4,7 +4,7 @@ import { ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";
 import { Logo, Marquee, Rule } from "@/components/ui";
 import { useRouter } from "next/navigation";
-import { BUSINESS, COUNTRIES, SERVICES } from "@/data/content";
+import { BUSINESS, SERVICES } from "@/data/content";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -17,6 +17,28 @@ const quickLinks = [
   { label: "Gallery", href: "/gallery" },
   { label: "Latest News", href: "/news" },
   { label: "FAQ", href: "/faq" },
+];
+
+const footerCountries = [
+  { name: "India", flag: "🇮🇳" },
+  { name: "Georgia", flag: "🇬🇪" },
+  { name: "Kazakhstan", flag: "🇰🇿" },
+  { name: "Bangladesh", flag: "🇧🇩" },
+  { name: "Philippines", flag: "🇵🇭" },
+  { name: "Germany", flag: "🇩🇪" },
+  { name: "Mauritius", flag: "🇲🇺" },
+  { name: "Kyrgyzstan", flag: "🇰🇬" },
+  { name: "Uzbekistan", flag: "🇺🇿" },
+  { name: "Armenia", flag: "🇦🇲" },
+  { name: "Nepal", flag: "🇳🇵" },
+  { name: "Egypt", flag: "🇪🇬" },
+  { name: "Italy", flag: "🇮🇹" },
+  { name: "France", flag: "🇫🇷" },
+  { name: "Poland", flag: "🇵🇱" },
+  { name: "China", flag: "🇨🇳" },
+  { name: "Tajikistan", flag: "🇹🇯" },
+  { name: "Malaysia", flag: "🇲🇾" },
+  { name: "Ukraine", flag: "🇺🇦" },
 ];
 
 const socials: { label: string; path: string }[] = [
@@ -124,7 +146,7 @@ export default function Footer() {
               ))}
             </FooterCol>
             <FooterCol title="Countries">
-              {COUNTRIES.map((c) => (
+              {footerCountries.map((c) => (
                 <FooterLink key={c.name} label={`${c.flag}  ${c.name}`} onClick={() => router.push("/countries")} />
               ))}
             </FooterCol>

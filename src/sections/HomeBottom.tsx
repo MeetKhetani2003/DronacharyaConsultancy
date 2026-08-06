@@ -494,6 +494,7 @@ export function Testimonials() {
 export function Universities() {
   const rail = useRef<HTMLDivElement>(null);
   const scrollBy = (d: number) => rail.current?.scrollBy({ left: d * 420, behavior: "smooth" });
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
     <Section id="universities" className="overflow-hidden bg-white">
@@ -539,12 +540,15 @@ export function Universities() {
             transition={{ duration: 0.7, delay: (i % 4) * 0.06, ease: [0.16, 1, 0.3, 1] }}
             className="group card-lift w-[300px] shrink-0 snap-start overflow-hidden rounded-3xl border border-ink/[0.07] bg-white sm:w-[360px]"
           >
-            <div className="img-zoom relative aspect-[16/11] overflow-hidden">
+            <button
+              onClick={() => setOpen(i)}
+              className="img-zoom relative aspect-[16/11] overflow-hidden w-full text-left cursor-pointer"
+            >
               <img src={u.image} alt={u.name} loading="lazy" className="h-full w-full object-cover" />
               <span className="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-medium tracking-[0.12em] text-ink uppercase backdrop-blur">
                 {u.flag} {u.country}
               </span>
-            </div>
+            </button>
             <div className="p-7">
               <p className="text-[11px] tracking-[0.18em] text-brand uppercase">{u.rank}</p>
               <h3 className="font-display mt-3 min-h-[52px] text-[18px] leading-snug font-medium text-ink">{u.name}</h3>
@@ -557,6 +561,12 @@ export function Universities() {
           </motion.article>
         ))}
       </div>
+      <Lightbox
+        items={UNIVERSITIES.map((u) => ({ src: u.image, title: u.name, category: `${u.flag} ${u.country}` }))}
+        index={open}
+        onClose={() => setOpen(null)}
+        onIndex={setOpen}
+      />
     </Section>
   );
 }
