@@ -582,7 +582,11 @@ export function Logo({ dark = false, compact = false }: { dark?: boolean; compac
       <img
         src="/logo.png"
         alt={`${BUSINESS.name} Logo`}
-        className={cn("h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105", compact && "h-10")}
+        className={cn(
+          "h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105",
+          compact && "h-10",
+          dark && "brightness-0 invert"
+        )}
       />
     </button>
   );

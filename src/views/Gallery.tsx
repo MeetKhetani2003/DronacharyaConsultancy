@@ -60,7 +60,7 @@ export default function GalleryPage() {
                   transition={{ duration: 0.55, delay: (i % 6) * 0.04, ease: [0.16, 1, 0.3, 1] }}
                   onClick={() => setOpen(i)}
                   className={cn(
-                    "img-zoom group relative block w-full overflow-hidden rounded-2xl border border-ink/[0.06]",
+                    "img-zoom group relative block w-full overflow-hidden rounded-2xl border border-ink/[0.06] break-inside-avoid",
                     i % 5 === 0 ? "aspect-[3/4]" : i % 7 === 3 ? "aspect-square" : "aspect-[4/3]",
                   )}
                 >

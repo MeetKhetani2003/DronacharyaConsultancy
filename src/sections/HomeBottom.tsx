@@ -87,7 +87,7 @@ export function Countries({ full = false }: { full?: boolean }) {
           <SectionHead
             eyebrow="Study Destinations"
             title="Eight countries. One uncompromising standard of recognition."
-            sub="Every destination we recommend is NMC-listed and WHO/WDOMS registered — verified before a single application is filed."
+          // sub="Every destination we recommend is NMC-listed and WHO/WDOMS registered — verified before a single application is filed."
           />
           <Reveal delay={0.12}>
             <Btn to="/countries" variant="outline">
@@ -607,6 +607,13 @@ export function Scholarships() {
                 </div>
 
                 <div className="relative mt-7 space-y-5">
+                  {/* @ts-ignore */}
+                  {s.description && (
+                    <div>
+                      <p className="text-[10.5px] tracking-[0.2em] text-white uppercase">Description</p>
+                      <p className="mt-1.5 text-[13.5px] font-semibold text-white">{/* @ts-ignore */ s.description}</p>
+                    </div>
+                  )}
                   <div>
                     <p className="text-[10.5px] tracking-[0.2em] text-white uppercase">Eligibility</p>
                     <p className="mt-1.5 text-[13.5px] font-semibold text-white">{s.eligibility}</p>
@@ -622,10 +629,13 @@ export function Scholarships() {
                       ))}
                     </ul>
                   </div>
-                  <div>
-                    <p className="text-[10.5px] tracking-[0.2em] text-white uppercase">Application Process</p>
-                    <p className="mt-1.5 text-[13.5px] font-semibold text-white">{s.process}</p>
-                  </div>
+                  {/* @ts-ignore */}
+                  {s.process && (
+                    <div>
+                      <p className="text-[10.5px] tracking-[0.2em] text-white uppercase">Application Process</p>
+                      <p className="mt-1.5 text-[13.5px] font-semibold text-white">{/* @ts-ignore */ s.process}</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </Reveal>

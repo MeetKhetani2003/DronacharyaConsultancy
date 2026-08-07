@@ -280,12 +280,12 @@ export const SERVICES = [
 ];
 
 export const UNIVERSITIES = [
-  { name: "Tbilisi State Medical University", country: "Georgia", flag: "🇬🇪", rank: "Georgia Rank #1", recognition: "NMC • WFME • WHO", fees: "$8,000 / year", image: MEDIA.uni2 },
-  { name: "Batumi Shota Rustaveli State University", country: "Georgia", flag: "🇬🇪", rank: "Est. 1935", recognition: "NMC • WHO • ECFMG", fees: "$6,500 / year", image: MEDIA.uni3 },
-  { name: "Kazakh National Medical University", country: "Kazakhstan", flag: "🇰🇿", rank: "Kazakhstan Rank #1", recognition: "NMC • WHO • WDOMS", fees: "$4,200 / year", image: MEDIA.uni6 },
-  { name: "Astana Medical University", country: "Kazakhstan", flag: "🇰🇿", rank: "Est. 1964", recognition: "NMC • WHO", fees: "$3,900 / year", image: MEDIA.uni4 },
-  { name: "Dhaka National Medical College", country: "Bangladesh", flag: "🇧🇩", rank: "SAARC Quota", recognition: "NMC • WHO • BMDC", fees: "$8,500 / year", image: MEDIA.uni8 },
-  { name: "Davao Medical School Foundation", country: "Philippines", flag: "🇵🇭", rank: "CHED Autonomous", recognition: "NMC • WHO • ECFMG", fees: "$5,200 / year", image: MEDIA.uni5 },
+  { name: "MBBS in Mauritius | Fees, Eligibility, Admission Process", country: "Georgia", flag: "🇬🇪", rank: "Georgia Rank #1", recognition: "NMC • WFME • WHO", fees: "$8,000 / year", image: MEDIA.uni2 },
+  { name: "Admission Counselling | MBBS, B.Tech, BBA & MBA Guidance", country: "Georgia", flag: "🇬🇪", rank: "Est. 1935", recognition: "NMC • WHO • ECFMG", fees: "$6,500 / year", image: MEDIA.uni3 },
+  { name: "Biotechnology Admissions | B.Tech Biotechnology, Biomedical Engineering, Bioinformatics & B.Sc. Programs", country: "Kazakhstan", flag: "🇰🇿", rank: "Kazakhstan Rank #1", recognition: "NMC • WHO • WDOMS", fees: "$4,200 / year", image: MEDIA.uni6 },
+  { name: "College Selection Guidance | Career Counselling & Admission Support After 12th", country: "Kazakhstan", flag: "🇰🇿", rank: "Est. 1964", recognition: "NMC • WHO", fees: "$3,900 / year", image: MEDIA.uni4 },
+  { name: "Pharm.D Admissions | Doctor of Pharmacy Course | Admission Guidance", country: "Bangladesh", flag: "🇧🇩", rank: "SAARC Quota", recognition: "NMC • WHO • BMDC", fees: "$8,500 / year", image: MEDIA.uni8 },
+  { name: "MBBS in Philippines | Admission, Fees, Eligibility & Complete Guidance", country: "Philippines", flag: "🇵🇭", rank: "CHED Autonomous", recognition: "NMC • WHO • ECFMG", fees: "$5,200 / year", image: MEDIA.uni5 },
 ];
 
 export const SCHOLARSHIPS = [
@@ -310,15 +310,36 @@ export const SCHOLARSHIPS = [
     benefits: ["Direct university funding", "Renewable each academic year", "Research assistantship options"],
     process: "Dronacharya nominates shortlisted students to the university panel.",
   },
+  {
+    title: "🎓 No Tuition Fees Courses in Europe",
+    amount: "100% Tuition Waiver",
+    description: "Study at top European universities with No Tuition Fee programs. Get complete admission guidance from application to visa.",
+    eligibility: "12th / Graduate students with required academic qualifications.",
+    benefits: [
+      "No Tuition Fees",
+      "Globally Recognized Universities",
+      "Scholarship Assistance",
+      "Visa & Documentation Support"
+    ],
+  },
 ];
 
 export const TESTIMONIALS = [
-  { name: "Updated Testimonial 1", role: "MBBS Graduate", city: "Bhilwara", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student2, rating: 5 },
-  { name: "Updated Testimonial 2", role: "Final Year Student", city: "Udaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student1, rating: 5 },
-  { name: "Updated Testimonial 3", role: "Parent", city: "Chittorgarh", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student3, rating: 5 },
-  { name: "Updated Testimonial 4", role: "FMGE Qualified", city: "Ajmer", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student6, rating: 5 },
-  { name: "Updated Testimonial 5", role: "MBBS 2nd Year", city: "Kota", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student4, rating: 5 },
-  { name: "Updated Testimonial 6", role: "Siblings", city: "Jaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student5, rating: 5 },
+  { name: "Sanjay Kushwaha", role: "MBBS Graduate", city: "Bhilwara", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student2, rating: 5 },
+  { name: "Khushal Choudhary", role: "Final Year Student", city: "Udaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student1, rating: 5 },
+  { name: "Faizal Jameel", role: "Parent", city: "Chittorgarh", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student3, rating: 5 },
+  { name: "Palak Tomar", role: "FMGE Qualified", city: "Ajmer", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student6, rating: 5 },
+  { name: "Lakshya Tomar", role: "MBBS 2nd Year", city: "Kota", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student4, rating: 5 },
+  { name: "Hanuman Prasad Sharma", role: "Siblings", city: "Jaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student5, rating: 5 },
+  { name: "Aryan Lakshkar", role: "Student", city: "Bhilwara", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student1, rating: 5 },
+  { name: "Kanak Lulani", role: "Student", city: "Udaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student2, rating: 5 },
+  { name: "Gitansh Bhatt", role: "Student", city: "Chittorgarh", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student3, rating: 5 },
+  { name: "Avinash Kumhar", role: "Student", city: "Ajmer", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student4, rating: 5 },
+  { name: "Hardik Birla", role: "Student", city: "Kota", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student5, rating: 5 },
+  { name: "Nasreem Khan", role: "Student", city: "Jaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student6, rating: 5 },
+  { name: "Vishal Kabra", role: "Student", city: "Bhilwara", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student1, rating: 5 },
+  { name: "Zilani Sheikh", role: "Student", city: "Udaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student2, rating: 5 },
+  { name: "Muskan Khan", role: "Student", city: "Chittorgarh", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student3, rating: 5 },
 ];
 
 export const SUCCESS_STORIES = [
