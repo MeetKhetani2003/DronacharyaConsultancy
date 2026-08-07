@@ -421,7 +421,7 @@ export function Testimonials() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-12">
+        <div className="mt-14 grid items-center gap-6 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <AnimatePresence mode="wait">
               <motion.blockquote
@@ -430,7 +430,7 @@ export function Testimonials() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -14 }}
                 transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                className="relative flex h-full flex-col justify-between rounded-3xl border border-ink/[0.07] bg-white p-9 md:p-12"
+                className="relative flex flex-col rounded-3xl border border-ink/[0.07] bg-white p-9 md:p-12"
               >
                 <div className="flex items-start justify-between gap-6">
                   <Quote className="h-9 w-9 text-brand" />
@@ -438,7 +438,7 @@ export function Testimonials() {
                     <Play className="h-3 w-3 fill-brand text-brand" /> Video Story
                   </span>
                 </div>
-                <p className="font-display mt-7 text-[19px] leading-[1.55] font-semibold text-ink md:text-[26px]">
+                <p className="font-display mt-8 text-[19px] leading-[1.55] font-semibold text-ink md:text-[26px]">
                   “{t.quote}”
                 </p>
                 <div className="mt-10 flex items-center gap-4">
@@ -457,7 +457,7 @@ export function Testimonials() {
           </div>
 
           <div className="lg:col-span-4">
-            <div className="grid h-full grid-cols-3 gap-3 lg:grid-cols-2">
+            <div className="hide-scrollbar grid max-h-[400px] grid-cols-3 gap-3 overflow-y-auto lg:max-h-[460px] lg:grid-cols-2">
               {TESTIMONIALS.map((x, idx) => (
                 <button
                   key={x.name}
