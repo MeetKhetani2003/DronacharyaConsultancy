@@ -556,9 +556,6 @@ export function Universities() {
               className="img-zoom relative aspect-[16/11] overflow-hidden w-full text-left cursor-pointer"
             >
               <img src={u.image} alt={u.name} loading="lazy" className="h-full w-full object-cover" />
-              <span className="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-medium tracking-[0.12em] text-ink uppercase backdrop-blur">
-                {u.flag} {u.country}
-              </span>
             </button>
             <div className="p-7">
               <p className="text-[11px] tracking-[0.18em] text-brand uppercase">{u.rank}</p>
