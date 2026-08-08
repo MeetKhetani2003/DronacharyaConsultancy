@@ -1,6 +1,6 @@
 "use client";
 import {
-  Countries,
+  // Countries,
   Faq,
   FinalCta,
   IndiaTracks,
@@ -26,7 +26,7 @@ export default function Home() {
       <Universities />
       <Scholarships />
       <WhyChooseUs />
-      <Countries />
+      {/* <Countries /> */}
       <Newspapers />
       <LatestNews />
       <IndiaTracks />
