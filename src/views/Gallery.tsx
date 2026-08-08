@@ -1,18 +1,26 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
-import { Expand } from "lucide-react";
+import { Expand, Video } from "lucide-react";
 import { useMemo, useState } from "react";
 import PageHero from "@/components/PageHero";
 import { Lightbox, Section, SectionHead } from "@/components/ui";
-import { GALLERY, GALLERY_CATEGORIES, MEDIA } from "@/data/content";
+import { MEDIA } from "@/data/content";
 import { FinalCta } from "@/sections/HomeBottom";
 import { cn } from "@/utils/cn";
 
-export default function GalleryPage() {
+const GALLERY_CATEGORIES = ["All", "Photos", "Videos"];
+
+interface GalleryItem {
+  title: string;
+  category: string;
+  src: string;
+}
+
+export default function GalleryPage({ initialItems = [] }: { initialItems?: GalleryItem[] }) {
   const [cat, setCat] = useState("All");
   const [open, setOpen] = useState<number | null>(null);
 
-  const items = useMemo(() => (cat === "All" ? GALLERY : GALLERY.filter((g) => g.category === cat)), [cat]);
+  const items = useMemo(() => (cat === "All" ? initialItems : initialItems.filter((g) => g.category === cat)), [cat, initialItems]);
 
   return (
     <>
@@ -42,7 +50,7 @@ export default function GalleryPage() {
               >
                 {c}
                 <span className="ml-2 text-[10.5px] opacity-60">
-                  {c === "All" ? GALLERY.length : GALLERY.filter((g) => g.category === c).length}
+                  {c === "All" ? initialItems.length : initialItems.filter((g) => g.category === c).length}
                 </span>
               </button>
             ))}
@@ -60,14 +68,18 @@ export default function GalleryPage() {
                   transition={{ duration: 0.55, delay: (i % 6) * 0.04, ease: [0.16, 1, 0.3, 1] }}
                   onClick={() => setOpen(i)}
                   className={cn(
-                    "img-zoom group relative block w-full overflow-hidden rounded-2xl border border-ink/[0.06] break-inside-avoid",
+                    "img-zoom group relative block w-full overflow-hidden rounded-2xl border border-ink/[0.06] break-inside-avoid bg-ink/5",
                     i % 5 === 0 ? "aspect-[3/4]" : i % 7 === 3 ? "aspect-square" : "aspect-[4/3]",
                   )}
                 >
-                  <img src={g.src} alt={g.title} loading="lazy" className="h-full w-full object-cover" />
+                  {g.category === 'Videos' ? (
+                    <video src={g.src} className="h-full w-full object-cover" preload="metadata" />
+                  ) : (
+                    <img src={g.src} alt={g.title} loading="lazy" className="h-full w-full object-cover" />
+                  )}
                   <div className="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/55" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
-                    <Expand className="h-5 w-5 text-white" />
+                    {g.category === 'Videos' ? <Video className="h-6 w-6 text-white mb-2" /> : <Expand className="h-5 w-5 text-white" />}
                     <p className="font-display mt-3 px-4 text-center text-[14px] font-semibold text-white">{g.title}</p>
                     <p className="mt-1 text-[10.5px] tracking-[0.18em] text-white uppercase">{g.category}</p>
                   </div>

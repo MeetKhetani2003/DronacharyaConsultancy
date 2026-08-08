@@ -553,7 +553,11 @@ export function Lightbox({
             className="mx-auto max-h-[86vh] w-[90vw] max-w-5xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <img src={items[index].src} alt={items[index].title ?? ""} className="max-h-[74vh] w-full rounded-2xl object-contain" />
+            {items[index].category === 'Videos' ? (
+              <video src={items[index].src} controls autoPlay className="max-h-[74vh] w-full rounded-2xl object-contain" />
+            ) : (
+              <img src={items[index].src} alt={items[index].title ?? ""} className="max-h-[74vh] w-full rounded-2xl object-contain" />
+            )}
             <figcaption className="mt-5 flex items-center justify-between text-white">
               <span className="font-display text-base font-semibold">{items[index].title}</span>
               <span className="text-[11px] tracking-[0.2em] uppercase">

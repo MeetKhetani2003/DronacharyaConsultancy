@@ -1,5 +1,7 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState, useRef, type ReactNode } from "react";
+import { getTestimonials } from '@/app/admin/dashboard/actions';
 import {
   ArrowLeft,
   ArrowRight,
@@ -25,7 +27,6 @@ import {
   Users,
   Wallet,
 } from "lucide-react";
-import { useRef, useState, type ReactNode } from "react";
 import {
   Btn,
   Lightbox,
@@ -382,8 +383,18 @@ export function Newspapers() {
 
 export function Testimonials() {
   const [i, setI] = useState(0);
-  const t = TESTIMONIALS[i];
-  const go = (d: number) => setI((p) => (p + d + TESTIMONIALS.length) % TESTIMONIALS.length);
+  const [testimonialsList, setTestimonialsList] = useState<any[]>(TESTIMONIALS);
+
+  useEffect(() => {
+    getTestimonials().then(res => {
+      if (res.success && res.data && res.data.length > 0) {
+        setTestimonialsList(res.data);
+      }
+    });
+  }, []);
+
+  const t = testimonialsList[i] || TESTIMONIALS[0];
+  const go = (d: number) => setI((p) => (p + d + testimonialsList.length) % testimonialsList.length);
 
   return (
     <Section className="bg-mist">
@@ -442,11 +453,11 @@ export function Testimonials() {
                   “{t.quote}”
                 </p>
                 <div className="mt-10 flex items-center gap-4">
-                  <img src={t.image} alt={t.name} loading="lazy" className="h-14 w-14 rounded-full object-cover" />
+                  <img src={t.image || MEDIA.gradJoy} alt={t.name} loading="lazy" className="h-14 w-14 rounded-full object-cover" />
                   <div>
                     <p className="font-display text-[15px] font-medium text-ink">{t.name}</p>
-                    <p className="text-[12.5px] font-semibold text-ink">{t.role}</p>
-                    <p className="text-[11.5px] tracking-[0.12em] text-ink uppercase">{t.city}</p>
+                    <p className="text-[12.5px] font-semibold text-ink">{t.role || 'Medical Student'}</p>
+                    <p className="text-[11.5px] tracking-[0.12em] text-ink uppercase">{t.city || t.university}</p>
                   </div>
                   <div className="ml-auto hidden md:block">
                     <Stars />
@@ -458,9 +469,9 @@ export function Testimonials() {
 
           <div className="lg:col-span-4">
             <div className="hide-scrollbar grid max-h-[400px] grid-cols-3 gap-3 overflow-y-auto lg:max-h-[460px] lg:grid-cols-2">
-              {TESTIMONIALS.map((x, idx) => (
+              {testimonialsList.map((x, idx) => (
                 <button
-                  key={x.name}
+                  key={x.name + idx}
                   onClick={() => setI(idx)}
                   aria-label={`Show testimonial from ${x.name}`}
                   className={cn(
@@ -468,7 +479,7 @@ export function Testimonials() {
                     idx === i ? "border-brand ring-2 ring-brand/25" : "border-ink/[0.07] opacity-70 hover:opacity-100",
                   )}
                 >
-                  <img src={x.image} alt={x.name} loading="lazy" className="aspect-square h-full w-full object-cover" />
+                  <img src={x.image || MEDIA.gradJoy} alt={x.name} loading="lazy" className="aspect-square h-full w-full object-cover" />
                   <span className="absolute inset-0 flex items-center justify-center bg-ink/25 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                     <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-brand">
                       <Play className="h-3.5 w-3.5 fill-current" />
