@@ -62,7 +62,7 @@ export default function PageHero({
 
         <h1 className="font-display mt-5 max-w-4xl text-[clamp(2.3rem,5.6vw,4.4rem)] leading-[1.02] font-extralight tracking-[-0.035em] text-white">
           {words.map((w, i) => (
-            <span key={`${w}-${i}`} className="inline-block overflow-hidden align-bottom">
+            <span key={`${w}-${i}`} className="inline-block overflow-hidden align-bottom pb-2 pt-2">
               <motion.span
                 className={
                   highlight && w.replace(/[^\w'’]/g, "").toLowerCase() === highlight.toLowerCase()

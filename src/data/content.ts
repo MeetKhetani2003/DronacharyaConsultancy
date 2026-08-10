@@ -324,23 +324,7 @@ export const SCHOLARSHIPS = [
   },
 ];
 
-export const TESTIMONIALS = [
-  { name: "Sanjay Kushwaha", role: "MBBS Graduate", city: "Bhilwara", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student2, rating: 5 },
-  { name: "Khushal Choudhary", role: "Final Year Student", city: "Udaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student1, rating: 5 },
-  { name: "Faizal Jameel", role: "Parent", city: "Chittorgarh", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student3, rating: 5 },
-  { name: "Palak Tomar", role: "FMGE Qualified", city: "Ajmer", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student6, rating: 5 },
-  { name: "Lakshya Tomar", role: "MBBS 2nd Year", city: "Kota", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student4, rating: 5 },
-  { name: "Hanuman Prasad Sharma", role: "Siblings", city: "Jaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student5, rating: 5 },
-  { name: "Aryan Lakshkar", role: "Student", city: "Bhilwara", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student1, rating: 5 },
-  { name: "Kanak Lulani", role: "Student", city: "Udaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student2, rating: 5 },
-  { name: "Gitansh Bhatt", role: "Student", city: "Chittorgarh", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student3, rating: 5 },
-  { name: "Avinash Kumhar", role: "Student", city: "Ajmer", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student4, rating: 5 },
-  { name: "Hardik Birla", role: "Student", city: "Kota", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student5, rating: 5 },
-  { name: "Nasreem Khan", role: "Student", city: "Jaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student6, rating: 5 },
-  { name: "Vishal Kabra", role: "Student", city: "Bhilwara", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student1, rating: 5 },
-  { name: "Zilani Sheikh", role: "Student", city: "Udaipur", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student2, rating: 5 },
-  { name: "Muskan Khan", role: "Student", city: "Chittorgarh", quote: "This is a placeholder for the updated testimonial content.", image: MEDIA.student3, rating: 5 },
-];
+
 
 export const SUCCESS_STORIES = [
   { title: "NEET Counselling Seminar 2025", place: "Bhilwara", image: MEDIA.seminar1, span: "tall" },

@@ -110,7 +110,7 @@ export function TextReveal({
       {words.map((w, i) => {
         const isHi = highlight && w.replace(/[^\w'’]/g, "").toLowerCase() === highlight.toLowerCase();
         return (
-          <span key={`${w}-${i}`} className="inline-block overflow-hidden align-bottom">
+          <span key={`${w}-${i}`} className="inline-block overflow-hidden align-bottom pb-2 pt-2">
             <motion.span
               className={cn("inline-block", isHi && "text-brand")}
               initial={{ y: "110%", opacity: 0 }}
@@ -348,7 +348,7 @@ export function SectionHead({
       {eyebrow && <Eyebrow dark={dark}>{eyebrow}</Eyebrow>}
       <h2
         className={cn(
-          "font-display mt-2 text-[clamp(2rem,4.6vw,3.6rem)] leading-[0.6] font-semibold tracking-[-0.03em]",
+          "font-display mt-2 text-[clamp(2rem,4.6vw,3.6rem)] leading-[1.1] font-semibold tracking-[-0.03em]",
           dark ? "text-white" : "text-ink",
         )}
       >

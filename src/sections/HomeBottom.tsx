@@ -50,7 +50,6 @@ import {
   SCHOLARSHIPS,
   SERVICES,
   SUCCESS_STORIES,
-  TESTIMONIALS,
   UNIVERSITIES,
 } from "@/data/content";
 import { useRouter } from "next/navigation";
@@ -383,7 +382,7 @@ export function Newspapers() {
 
 export function Testimonials() {
   const [i, setI] = useState(0);
-  const [testimonialsList, setTestimonialsList] = useState<any[]>(TESTIMONIALS);
+  const [testimonialsList, setTestimonialsList] = useState<any[]>([]);
 
   useEffect(() => {
     getTestimonials().then(res => {
@@ -393,7 +392,9 @@ export function Testimonials() {
     });
   }, []);
 
-  const t = testimonialsList[i] || TESTIMONIALS[0];
+  if (testimonialsList.length === 0) return null;
+
+  const t = testimonialsList[i];
   const go = (d: number) => setI((p) => (p + d + testimonialsList.length) % testimonialsList.length);
 
   return (
