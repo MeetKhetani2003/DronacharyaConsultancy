@@ -366,6 +366,30 @@ export function FaqPage() {
 /* ------------------------------------------------------------------ */
 
 export function EventsPage() {
+  const pastSessions = [
+    { date: "2 August", city: "Kota" },
+    { date: "26 July", city: "Jaipur" },
+    { date: "26 To 29 July", city: "Bhilwara" },
+    { date: "23 July", city: "Udaipur" },
+    { date: "5 July", city: "Chittorgarh" },
+    { date: "24–25 June", city: "Bhilwara" },
+    { date: "22 June", city: "Udaipur" },
+    { date: "14 June", city: "Jaipur" },
+    { date: "11 June", city: "Jodhpur" },
+    { date: "9 June", city: "Bhilwara" },
+    { date: "7 June", city: "Kota" },
+    { date: "5 June", city: "Ajmer" },
+    { date: "4 June", city: "Jaipur" },
+    { date: "1 June", city: "Chittorgarh" },
+    { date: "31 May", city: "Bhilwara" },
+    { date: "28 May", city: "Udaipur" },
+    { date: "24–25 May", city: "Bhilwara" },
+    { date: "17 May", city: "Bhilwara" },
+    { date: "9 May", city: "Udaipur" },
+    { date: "8 May", city: "Chittorgarh" },
+    { date: "7 May", city: "Bhilwara" },
+  ];
+
   return (
     <>
       <PageHero
@@ -377,27 +401,93 @@ export function EventsPage() {
         image={MEDIA.seminar1}
       />
       
-      <Section className="bg-mist">
-        <div className="container-x max-w-3xl text-center">
-          <SectionHead eyebrow="Schedule" title="Upcoming Events" align="center" />
+      <Section className="bg-mist pb-0">
+        <div className="container-x">
+          <SectionHead eyebrow="Past Sessions" title="Successfully Conducted Sessions Across Rajasthan" align="center" />
+          <p className="text-center text-[15px] font-semibold text-ink/70 mt-4 mb-10 max-w-2xl mx-auto">
+            Connecting with students and parents through our counselling sessions across major cities of Rajasthan.
+          </p>
+          
           <Reveal delay={0.15}>
-            <div className="mt-14 rounded-3xl border border-ink/[0.07] bg-white p-12 shadow-sm">
-              <div className="flex flex-col items-center justify-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-mist text-brand">
-                  <Calendar className="h-8 w-8" />
-                </div>
-                <h3 className="font-display text-xl font-medium text-ink">No upcoming events right now</h3>
-                <p className="text-center text-[14.5px] leading-relaxed font-semibold text-ink">
-                  We are currently planning our next schedule of seminars. Check back later or contact us directly to arrange a free one-on-one counselling session.
-                </p>
-                <div className="mt-4">
-                  <Btn to="/contact" variant="primary">
-                    Book Free Counselling
-                  </Btn>
-                </div>
-              </div>
+            <div className="overflow-x-auto rounded-3xl border border-ink/[0.07] bg-white shadow-sm max-w-3xl mx-auto mb-16">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-brand/5 border-b border-ink/[0.07]">
+                    <th className="py-4 px-6 font-display text-lg font-medium text-brand">Date</th>
+                    <th className="py-4 px-6 font-display text-lg font-medium text-brand">City</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {pastSessions.map((session, i) => (
+                    <tr key={i} className="border-b border-ink/[0.05] hover:bg-mist/50 transition-colors">
+                      <td className="py-3 px-6 font-semibold text-ink/80">{session.date}</td>
+                      <td className="py-3 px-6 font-semibold text-ink/80">{session.city}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </Reveal>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="container-x">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+            {/* Meet Atul Bapna Sir */}
+            <Reveal>
+              <div className="rounded-3xl border border-ink/[0.07] bg-mist/50 p-8 lg:p-12 shadow-sm h-full flex flex-col">
+                <SectionHead eyebrow="Expertise" title="Meet Atul Bapna Sir" />
+                <div className="mt-8 space-y-4 flex-grow">
+                  <p className="font-semibold text-brand text-lg">Founder & Director – Dronacharya Group</p>
+                  <ul className="space-y-3 mt-4">
+                    <li className="flex items-start gap-3 text-ink/80 font-medium">
+                      <div className="h-2 w-2 mt-2 rounded-full bg-brand flex-shrink-0" />
+                      Internationally Fame, Career Mentor
+                    </li>
+                    <li className="flex items-start gap-3 text-ink/80 font-medium">
+                      <div className="h-2 w-2 mt-2 rounded-full bg-brand flex-shrink-0" />
+                      Renowned Career Counsellor
+                    </li>
+                    <li className="flex items-start gap-3 text-ink/80 font-medium">
+                      <div className="h-2 w-2 mt-2 rounded-full bg-brand flex-shrink-0" />
+                      23+ Years of Experience in Career Guidance
+                    </li>
+                  </ul>
+                  <p className="mt-8 text-ink/70 leading-relaxed font-semibold">
+                    Guiding students and parents towards the right course, college and career opportunities through expert counselling and personalised guidance.
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Upcoming Sessions */}
+            <Reveal delay={0.15}>
+              <div className="rounded-3xl border border-ink/[0.07] bg-white p-8 lg:p-12 shadow-sm flex flex-col items-center justify-center text-center h-full">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand/10 text-brand mb-6">
+                  <Calendar className="h-8 w-8" />
+                </div>
+                <h3 className="font-display text-2xl font-medium text-brand mb-2">UPCOMING SESSIONS</h3>
+                <p className="font-display text-xl font-medium text-ink mb-6">COMING SOON!</p>
+                <p className="text-[16px] leading-relaxed font-semibold text-ink/80 mb-4">
+                  Students & Parents, Are You Ready?
+                </p>
+                <p className="text-[15px] font-medium text-ink/70 mb-8 max-w-sm">
+                  📍 Bhilwara | Chittorgarh | Udaipur | Kota | Ajmer | Jaipur | Jodhpur & More
+                </p>
+                
+                <div className="w-full h-[1px] bg-ink/10 mb-8" />
+                
+                <h4 className="font-display text-lg font-medium text-brand mb-3">NEW SESSION DATES ANNOUNCING SOON</h4>
+                <p className="text-[14.5px] font-medium text-ink/70 mb-6">
+                  Stay Connected & Be the First to Know
+                </p>
+                <Btn to="/contact" variant="primary" className="w-full justify-center">
+                  Contact Us
+                </Btn>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </Section>
       

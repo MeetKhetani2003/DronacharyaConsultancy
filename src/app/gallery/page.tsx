@@ -2,7 +2,7 @@ import GalleryPage from "@/views/Gallery";
 import connectToDatabase from "@/lib/mongodb";
 import Media from "@/models/Media";
 
-export const revalidate = 0; // Disable caching to always show latest media
+export const revalidate = 60; // Revalidate every 60 seconds to improve load time while keeping media fresh
 
 export default async function Page() {
   await connectToDatabase();

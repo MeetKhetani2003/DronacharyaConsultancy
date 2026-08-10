@@ -60,7 +60,7 @@ export default function GalleryPage({ initialItems = [] }: { initialItems?: Gall
             <AnimatePresence mode="popLayout">
               {items.map((g, i) => (
                 <motion.button
-                  key={g.src + g.title}
+                  key={`${g.src}-${g.title}-${i}`}
                   layout
                   initial={{ opacity: 0, scale: 0.94, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
