@@ -482,6 +482,12 @@ export function Marquee({
 /*  Lightbox                                                           */
 /* ------------------------------------------------------------------ */
 
+const getYouTubeId = (url: string) => {
+  if (typeof url !== 'string') return null;
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+  return match ? match[1] : null;
+};
+
 export function Lightbox({
   items,
   index,
@@ -554,7 +560,11 @@ export function Lightbox({
             onClick={(e) => e.stopPropagation()}
           >
             {items[index].category === 'Videos' ? (
-              <video src={items[index].src} controls autoPlay className="max-h-[74vh] w-full rounded-2xl object-contain" />
+              getYouTubeId(items[index].src) ? (
+                <iframe src={`https://www.youtube.com/embed/${getYouTubeId(items[index].src)}?autoplay=1`} allow="autoplay; fullscreen" className="max-h-[74vh] w-full aspect-video rounded-2xl object-contain border-0" allowFullScreen />
+              ) : (
+                <video src={items[index].src} controls autoPlay className="max-h-[74vh] w-full rounded-2xl object-contain" />
+              )
             ) : (
               <img src={items[index].src} alt={items[index].title ?? ""} className="max-h-[74vh] w-full rounded-2xl object-contain" />
             )}

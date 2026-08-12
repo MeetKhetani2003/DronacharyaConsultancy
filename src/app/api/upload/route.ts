@@ -9,36 +9,47 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData();
     
     const file = formData.get('file') as File | null;
+    const link = formData.get('link') as string | null;
     const title = formData.get('title') as string | null;
     const category = formData.get('category') as string | null;
 
-    if (!file || !title || !category) {
+    if (!title || !category) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    if (!file && !link) {
+      return NextResponse.json({ error: 'Provide either a file or a link' }, { status: 400 });
     }
 
     if (category !== 'Photos' && category !== 'Videos') {
       return NextResponse.json({ error: 'Invalid category' }, { status: 400 });
     }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    let fileUrl = '';
 
-    // Create unique filename
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const filename = file.name.replace(/\.[^/.]+$/, "") + '-' + uniqueSuffix + '.' + file.name.split('.').pop();
-    
-    // Ensure uploads directory exists
-    const uploadDir = join(process.cwd(), 'public', 'uploads');
-    try {
-      await mkdir(uploadDir, { recursive: true });
-    } catch (err) {
-      // Directory might already exist
+    if (link) {
+      fileUrl = link;
+    } else if (file) {
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+
+      // Create unique filename
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+      const filename = file.name.replace(/\.[^/.]+$/, "") + '-' + uniqueSuffix + '.' + file.name.split('.').pop();
+      
+      // Ensure uploads directory exists
+      const uploadDir = join(process.cwd(), 'public', 'uploads');
+      try {
+        await mkdir(uploadDir, { recursive: true });
+      } catch (err) {
+        // Directory might already exist
+      }
+
+      const path = join(uploadDir, filename);
+      await writeFile(path, buffer);
+
+      fileUrl = `/uploads/${filename}`;
     }
-
-    const path = join(uploadDir, filename);
-    await writeFile(path, buffer);
-
-    const fileUrl = `/uploads/${filename}`;
 
     // Save to database
     await connectToDatabase();

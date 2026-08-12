@@ -8,6 +8,12 @@ import { MEDIA } from "@/data/content";
 import { FinalCta } from "@/sections/HomeBottom";
 import { cn } from "@/utils/cn";
 
+const getYouTubeId = (url: string) => {
+  if (typeof url !== 'string') return null;
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+  return match ? match[1] : null;
+};
+
 const GALLERY_CATEGORIES = ["All", "Photos", "Videos"];
 
 interface GalleryItem {
@@ -73,7 +79,11 @@ export default function GalleryPage({ initialItems = [] }: { initialItems?: Gall
                   )}
                 >
                   {g.category === 'Videos' ? (
-                    <video src={g.src} className="h-full w-full object-cover" preload="metadata" />
+                    getYouTubeId(g.src) ? (
+                      <img src={`https://img.youtube.com/vi/${getYouTubeId(g.src)}/maxresdefault.jpg`} onError={(e) => { e.currentTarget.src = `https://img.youtube.com/vi/${getYouTubeId(g.src)}/hqdefault.jpg` }} className="h-full w-full object-cover" />
+                    ) : (
+                      <video src={g.src} className="h-full w-full object-cover" preload="metadata" />
+                    )
                   ) : (
                     <img src={g.src} alt={g.title} loading="lazy" className="h-full w-full object-cover" />
                   )}

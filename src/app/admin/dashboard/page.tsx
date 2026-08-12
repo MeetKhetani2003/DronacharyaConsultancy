@@ -6,6 +6,12 @@ import { Image as ImageIcon, MessageSquare, Trash2, LogOut, Loader2, Video, Plus
 import { getMedia, deleteMedia, getTestimonials, deleteTestimonial, createTestimonial } from './actions';
 import { Btn } from '@/components/ui';
 
+const getYouTubeId = (url: string) => {
+  if (typeof url !== 'string') return null;
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+  return match ? match[1] : null;
+};
+
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<'media' | 'testimonials'>('media');
   const [media, setMedia] = useState<any[]>([]);
@@ -13,6 +19,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
+  const [uploadType, setUploadType] = useState<'file' | 'link'>('file');
   const router = useRouter();
 
   useEffect(() => {
@@ -130,6 +137,22 @@ export default function AdminDashboard() {
           <div className="space-y-8">
             <div className="bg-white p-6 rounded-3xl border border-ink/5 shadow-sm">
               <h2 className="font-display text-xl font-bold mb-4">Upload New Media</h2>
+              <div className="flex gap-4 mb-4">
+                <button
+                  type="button"
+                  onClick={() => setUploadType('file')}
+                  className={`px-4 py-2 rounded-xl font-semibold transition-colors ${uploadType === 'file' ? 'bg-brand text-white' : 'bg-mist text-ink/60 hover:bg-ink/5'}`}
+                >
+                  Upload File
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setUploadType('link')}
+                  className={`px-4 py-2 rounded-xl font-semibold transition-colors ${uploadType === 'link' ? 'bg-brand text-white' : 'bg-mist text-ink/60 hover:bg-ink/5'}`}
+                >
+                  Provide Link
+                </button>
+              </div>
               <form onSubmit={handleMediaUpload} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input 
                   name="title" 
@@ -145,13 +168,23 @@ export default function AdminDashboard() {
                   <option value="Photos">Photo</option>
                   <option value="Videos">Video</option>
                 </select>
-                <input 
-                  type="file" 
-                  name="file" 
-                  accept="image/*,video/*"
-                  required 
-                  className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none md:col-span-2"
-                />
+                {uploadType === 'file' ? (
+                  <input 
+                    type="file" 
+                    name="file" 
+                    accept="image/*,video/*"
+                    required 
+                    className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none md:col-span-2"
+                  />
+                ) : (
+                  <input 
+                    type="url" 
+                    name="link" 
+                    placeholder="Video URL (e.g. YouTube link)"
+                    required 
+                    className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none md:col-span-2"
+                  />
+                )}
                 <button 
                   type="submit" 
                   disabled={uploading}
@@ -172,9 +205,11 @@ export default function AdminDashboard() {
                     <div key={m._id} className="bg-white rounded-2xl overflow-hidden border border-ink/5 shadow-sm group">
                       <div className="aspect-square bg-mist relative">
                         {m.category === 'Videos' ? (
-                          <div className="absolute inset-0 flex items-center justify-center bg-ink/10">
-                            <Video className="w-10 h-10 text-ink/40" />
-                          </div>
+                          getYouTubeId(m.src) ? (
+                            <iframe src={`https://www.youtube.com/embed/${getYouTubeId(m.src)}`} className="w-full h-full border-0" allowFullScreen />
+                          ) : (
+                            <video src={m.src} className="w-full h-full object-cover" controls preload="metadata" />
+                          )
                         ) : (
                           <img src={m.src} alt={m.title} className="w-full h-full object-cover" />
                         )}
