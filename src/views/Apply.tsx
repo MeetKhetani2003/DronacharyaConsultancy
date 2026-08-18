@@ -42,7 +42,7 @@ type Data = {
   neetYear: string;
   countries: string[];
   budget: string;
-  docs: string[];
+  docs: { [key: string]: File | null };
   notes: string;
 };
 
@@ -61,7 +61,7 @@ const initial: Data = {
   neetYear: "",
   countries: [],
   budget: "",
-  docs: [],
+  docs: {},
   notes: "",
 };
 
@@ -70,11 +70,60 @@ export default function ApplyPage() {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<Data>(initial);
   const [done, setDone] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [dir, setDir] = useState(1);
 
   const set = (k: keyof Data, v: string | string[]) => setData((d) => ({ ...d, [k]: v }));
-  const toggle = (k: "countries" | "docs", v: string) =>
+  const toggle = (k: "countries", v: string) =>
     setData((d) => ({ ...d, [k]: d[k].includes(v) ? d[k].filter((x) => x !== v) : [...d[k], v] }));
+  const setDoc = (docType: string, file: File | null) => {
+    setData((d) => ({ ...d, docs: { ...d.docs, [docType]: file } }));
+  };
+
+  const submitApplication = async () => {
+    setIsSubmitting(true);
+    try {
+      const formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('phone', data.phone);
+      formData.append('email', data.email);
+      formData.append('city', data.city);
+      formData.append('dob', data.dob);
+      formData.append('gender', data.gender);
+      formData.append('board', data.board);
+      formData.append('passYear', data.passYear);
+      formData.append('pcb', data.pcb);
+      formData.append('neetStatus', data.neetStatus);
+      formData.append('neetScore', data.neetScore);
+      formData.append('neetYear', data.neetYear);
+      formData.append('countries', JSON.stringify(data.countries));
+      formData.append('budget', data.budget);
+      formData.append('notes', data.notes);
+      
+      Object.keys(data.docs).forEach((docType) => {
+        const file = data.docs[docType];
+        if (file) {
+          formData.append(docType, file);
+        }
+      });
+      
+      const res = await fetch('/api/apply', {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (res.ok) {
+        setDone(true);
+      } else {
+        alert('Failed to submit application. Please try again.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const go = (d: number) => {
     setDir(d);
@@ -211,30 +260,27 @@ export default function ApplyPage() {
                     {step === 3 && (
                       <div>
                         <Label>Preferred Destinations (select any)</Label>
-                        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                          {COUNTRIES.map((c) => {
-                            const on = data.countries.includes(c.name);
+                        <div className="mt-4 flex flex-wrap gap-2.5">
+                          {[
+                            "India", "Georgia", "Kazakhstan", "Bangladesh", 
+                            "Philippines", "Germany", "Mauritius", "Kyrgyzstan", 
+                            "Uzbekistan", "Armenia", "Nepal", "Egypt", 
+                            "Italy", "France", "Poland", "China", 
+                            "Tajikistan", "Malaysia", "Ukraine"
+                          ].map((c) => {
+                            const on = data.countries.includes(c);
                             return (
                               <button
-                                key={c.name}
-                                onClick={() => toggle("countries", c.name)}
+                                key={c}
+                                onClick={() => toggle("countries", c)}
                                 className={cn(
-                                  "img-zoom group relative overflow-hidden rounded-2xl border text-left transition-all duration-400",
-                                  on ? "border-brand ring-2 ring-brand/20" : "border-ink/[0.08] hover:border-ink/25",
+                                  "rounded-full border px-4 py-2.5 text-[13px] font-medium transition-all duration-300",
+                                  on 
+                                    ? "border-brand bg-brand text-white shadow-md shadow-brand/20" 
+                                    : "border-ink/15 bg-white text-ink hover:border-ink/30 hover:bg-mist/50"
                                 )}
                               >
-                                <div className="relative aspect-[4/3] overflow-hidden">
-                                  <img src={c.image} alt={c.name} loading="lazy" className="h-full w-full object-cover" />
-                                  <div className="absolute inset-0 bg-gradient-to-t from-ink/85 to-transparent" />
-                                  <span className="absolute bottom-3 left-3 text-[13.5px] font-medium text-white">
-                                    {c.flag} {c.name}
-                                  </span>
-                                  {on && (
-                                    <span className="absolute top-3 right-3 flex h-6 w-6 items-center justify-center rounded-full bg-brand text-white">
-                                      <CheckCircle2 className="h-4 w-4" />
-                                    </span>
-                                  )}
-                                </div>
+                                {c}
                               </button>
                             );
                           })}
@@ -270,16 +316,29 @@ export default function ApplyPage() {
                         <Label>Upload Documents (optional at this stage)</Label>
                         <div className="mt-4 grid gap-3 sm:grid-cols-2">
                           {DOCS.map((d) => {
-                            const on = data.docs.includes(d);
+                            const file = data.docs[d];
+                            const on = !!file;
                             return (
-                              <button
+                              <label
                                 key={d}
-                                onClick={() => toggle("docs", d)}
                                 className={cn(
-                                  "flex items-center gap-4 rounded-2xl border border-dashed p-5 text-left transition-all duration-400",
+                                  "flex cursor-pointer items-center gap-4 rounded-2xl border border-dashed p-5 text-left transition-all duration-400",
                                   on ? "border-success bg-success/[0.05]" : "border-ink/15 hover:border-brand/50",
                                 )}
                               >
+                                <input
+                                  type="file"
+                                  accept=".pdf, .jpg, .jpeg"
+                                  className="hidden"
+                                  onChange={(e) => {
+                                    const file = e.target.files?.[0] || null;
+                                    if (file && file.size > 5 * 1024 * 1024) {
+                                      alert('File size must be under 5 MB');
+                                      return;
+                                    }
+                                    setDoc(d, file);
+                                  }}
+                                />
                                 <span
                                   className={cn(
                                     "flex h-10 w-10 shrink-0 items-center justify-center rounded-full",
@@ -290,11 +349,11 @@ export default function ApplyPage() {
                                 </span>
                                 <span>
                                   <span className="block text-[14px] font-medium text-ink">{d}</span>
-                                  <span className="block text-[12px] font-semibold text-ink">
-                                    {on ? "Marked as ready" : "PDF / JPG · up to 5 MB"}
+                                  <span className="block text-[12px] font-semibold text-ink line-clamp-1">
+                                    {on ? file.name : "PDF / JPG · up to 5 MB"}
                                   </span>
                                 </span>
-                              </button>
+                              </label>
                             );
                           })}
                         </div>
@@ -319,7 +378,7 @@ export default function ApplyPage() {
                             ["NEET", [data.neetStatus, data.neetScore].filter(Boolean).join(" · ")],
                             ["Preferred Countries", data.countries.join(", ")],
                             ["Budget", data.budget],
-                            ["Documents Ready", data.docs.join(", ")],
+                            ["Documents Ready", Object.keys(data.docs).filter(k => data.docs[k]).join(", ")],
                           ].map(([k, v]) => (
                             <div key={k as string} className="flex items-start justify-between gap-6 px-6 py-4">
                               <span className="text-[11.5px] tracking-[0.14em] text-ink uppercase">{k}</span>
@@ -356,8 +415,8 @@ export default function ApplyPage() {
                       Continue
                     </Btn>
                   ) : (
-                    <Btn onClick={() => setDone(true)} size="lg">
-                      Submit Application
+                    <Btn onClick={submitApplication} disabled={isSubmitting} size="lg">
+                      {isSubmitting ? "Submitting..." : "Submit Application"}
                     </Btn>
                   )}
                 </div>

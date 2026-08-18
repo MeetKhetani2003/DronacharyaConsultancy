@@ -15,7 +15,9 @@ import {
   Landmark,
   Luggage,
   Map,
+  MessageCircle,
   Minus,
+  Phone,
   Plane,
   Play,
   Plus,
@@ -25,6 +27,7 @@ import {
   Sparkles,
   Target,
   Users,
+  Video,
   Wallet,
 } from "lucide-react";
 import {
@@ -728,19 +731,39 @@ export function Faq({ compact = false }: { compact?: boolean }) {
         <div className="lg:col-span-4">
           <SectionHead eyebrow="FAQ" title="Questions parents ask us first." />
           <Reveal delay={0.15}>
-            <div className="mt-9 rounded-3xl border border-ink/[0.07] bg-white p-7">
-              <p className="font-display text-[16px] font-medium text-ink">Still unsure?</p>
-              <p className="mt-2 text-[13.5px] leading-relaxed font-semibold text-ink">
-                Speak directly with a senior counsellor. The first consultation is always free.
-              </p>
-              <div className="mt-6 flex flex-col gap-3">
-                <Btn href={BUSINESS.phoneHref} size="sm">
-                  Call {BUSINESS.phone}
-                </Btn>
-                <Btn to="/contact" size="sm" variant="outline">
-                  Book a Free Session
-                </Btn>
-              </div>
+            <div className="mt-9 flex flex-col gap-4">
+              <a
+                href={BUSINESS.whatsapp}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-center gap-5 rounded-[20px] bg-[#22c55e] px-6 py-5 text-white shadow-[0_8px_30px_-12px_rgba(34,197,94,0.6)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_-12px_rgba(34,197,94,0.7)]"
+              >
+                <MessageCircle className="h-8 w-8 shrink-0 stroke-[1.5]" />
+                <div>
+                  <p className="font-display text-[17px] font-semibold tracking-wide">Chat on WhatsApp</p>
+                  <p className="mt-1 text-[13.5px] font-medium text-white/90">Chat instantly</p>
+                </div>
+              </a>
+              <a
+                href={BUSINESS.phoneHref}
+                className="group flex items-center gap-5 rounded-[20px] bg-[#0ea5e9] px-6 py-5 text-white shadow-[0_8px_30px_-12px_rgba(14,165,233,0.6)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_-12px_rgba(14,165,233,0.7)]"
+              >
+                <Phone className="h-8 w-8 shrink-0 stroke-[1.5]" />
+                <div>
+                  <p className="font-display text-[17px] font-semibold tracking-wide">Get Instant Callback</p>
+                  <p className="mt-1 text-[13.5px] font-medium text-white/90">We call you back</p>
+                </div>
+              </a>
+              <a
+                href="/contact"
+                className="group flex items-center gap-5 rounded-[20px] bg-[#8b5cf6] px-6 py-5 text-white shadow-[0_8px_30px_-12px_rgba(139,92,246,0.6)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_-12px_rgba(139,92,246,0.7)]"
+              >
+                <Video className="h-8 w-8 shrink-0 stroke-[1.5]" />
+                <div>
+                  <p className="font-display text-[17px] font-semibold tracking-wide">Book Video Counselling</p>
+                  <p className="mt-1 text-[13.5px] font-medium text-white/90">Face-to-face guidance</p>
+                </div>
+              </a>
             </div>
           </Reveal>
         </div>

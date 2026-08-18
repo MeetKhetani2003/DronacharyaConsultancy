@@ -434,7 +434,7 @@ export const FAQS = [
   },
   {
     q: "What is the total cost of studying MBBS abroad?",
-    a: "Depending on the country, the complete course typically ranges between ₹15 lakh and ₹40 lakh including tuition, hostel and food. Kazakhstan and Russia are the most economical; Georgia and Mauritius sit at the premium end.",
+    a: "The complete course typically ranges between 15 - 40 Lakh, which includes TF (Tuition Fee) + Food + Hostel. Kazakhstan and Russia are the most economical; Georgia and Mauritius sit at the premium end.",
   },
   {
     q: "Will I get help with education loans?",
