@@ -220,6 +220,7 @@ type BtnProps = {
   className?: string;
   icon?: ReactNode;
   type?: "button" | "submit";
+  disabled?: boolean;
 };
 
 export function Btn({
@@ -232,6 +233,7 @@ export function Btn({
   className,
   icon,
   type = "button",
+  disabled,
 }: BtnProps) {
   const router = useRouter();
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([]);
@@ -295,7 +297,7 @@ export function Btn({
           {inner}
         </a>
       ) : (
-        <button type={type} className={cls} onClick={handle}>
+        <button type={type} className={cls} onClick={handle} disabled={disabled}>
           {inner}
         </button>
       )}
