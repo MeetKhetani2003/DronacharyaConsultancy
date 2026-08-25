@@ -56,6 +56,11 @@ export default function AdminDashboard() {
     try {
       const file = formData.get('imageFile');
       if (file && (file as File).size > 0) {
+        if ((file as File).size > 4.5 * 1024 * 1024) {
+          setError('File size exceeds the maximum limit of 4.5MB. Please upload a smaller file.');
+          setUploading(false);
+          return;
+        }
         const uploadData = new FormData();
         uploadData.append('file', file);
         const uploadRes = await fetch('/api/upload', { method: 'POST', body: uploadData });
@@ -96,6 +101,12 @@ export default function AdminDashboard() {
            setError('Please select a file');
            setUploading(false);
            return;
+        }
+        
+        if ((file as File).size > 4.5 * 1024 * 1024) {
+          setError('File size exceeds the maximum limit of 4.5MB. Please upload a smaller file.');
+          setUploading(false);
+          return;
         }
         
         const uploadData = new FormData();
