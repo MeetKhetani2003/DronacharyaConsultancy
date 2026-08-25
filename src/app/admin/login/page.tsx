@@ -34,7 +34,7 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen bg-mist flex items-center justify-center p-4">
-      <Reveal className="w-full max-w-md">
+      <div className="w-full max-w-md animate-in fade-in zoom-in duration-500">
         <div className="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-ink/[0.05]">
           <div className="flex justify-center mb-8">
             <div className="w-16 h-16 bg-brand/10 rounded-full flex items-center justify-center text-brand">
@@ -84,7 +84,7 @@ export default function AdminLogin() {
             </div>
           </form>
         </div>
-      </Reveal>
+      </div>
     </div>
   );
 }

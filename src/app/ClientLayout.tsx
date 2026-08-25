@@ -26,26 +26,32 @@ export default function ClientLayout({ children, businessData }: { children: Rea
     <BusinessContext.Provider value={businessData || BUSINESS}>
       <div className="relative min-h-screen bg-white pb-[72px] lg:pb-0">
         <Loader show={loading} />
-        <ScrollProgress />
-        <CursorGlow />
-        <Navbar />
+        {pathname.startsWith('/admin') ? (
+          <main>{children}</main>
+        ) : (
+          <>
+            <ScrollProgress />
+            <CursorGlow />
+            <Navbar />
 
-        <main>
-          <AnimatePresence>
-            <motion.div
-              key={pathname}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {children}
-            </motion.div>
-          </AnimatePresence>
-        </main>
+            <main>
+              <AnimatePresence>
+                <motion.div
+                  key={pathname}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  {children}
+                </motion.div>
+              </AnimatePresence>
+            </main>
 
-        <Footer />
-        <FloatingCta />
-        <MobileBar />
+            <Footer />
+            <FloatingCta />
+            <MobileBar />
+          </>
+        )}
       </div>
     </BusinessContext.Provider>
   );
