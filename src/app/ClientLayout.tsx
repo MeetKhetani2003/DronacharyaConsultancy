@@ -8,7 +8,12 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { BUSINESS } from "@/data/content";
 
-export default function ClientLayout({ children }: { children: React.ReactNode }) {
+import React, { createContext, useContext } from 'react';
+
+export const BusinessContext = createContext<any>(BUSINESS);
+export const useBusiness = () => useContext(BusinessContext);
+
+export default function ClientLayout({ children, businessData }: { children: React.ReactNode, businessData?: any }) {
   const pathname = usePathname();
   const [loading, setLoading] = useState(true);
 
@@ -18,29 +23,31 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-white pb-[72px] lg:pb-0">
-      <Loader show={loading} />
-      <ScrollProgress />
-      <CursorGlow />
-      <Navbar />
+    <BusinessContext.Provider value={businessData || BUSINESS}>
+      <div className="relative min-h-screen bg-white pb-[72px] lg:pb-0">
+        <Loader show={loading} />
+        <ScrollProgress />
+        <CursorGlow />
+        <Navbar />
 
-      <main>
-        <AnimatePresence>
-          <motion.div
-            key={pathname}
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {children}
-          </motion.div>
-        </AnimatePresence>
-      </main>
+        <main>
+          <AnimatePresence>
+            <motion.div
+              key={pathname}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
+        </main>
 
-      <Footer />
-      <FloatingCta />
-      <MobileBar />
-    </div>
+        <Footer />
+        <FloatingCta />
+        <MobileBar />
+      </div>
+    </BusinessContext.Provider>
   );
 }
 

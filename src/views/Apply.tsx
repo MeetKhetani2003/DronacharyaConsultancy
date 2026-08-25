@@ -5,7 +5,8 @@ import { useState } from "react";
 import PageHero from "@/components/PageHero";
 import { Btn, Reveal, Section } from "@/components/ui";
 import { useRouter } from "next/navigation";
-import { BUSINESS, COUNTRIES, MEDIA } from "@/data/content";
+import { COUNTRIES, MEDIA } from "@/data/content";
+import { useBusiness } from "@/app/ClientLayout";
 import { cn } from "@/utils/cn";
 
 const STEPS = [
@@ -66,6 +67,7 @@ const initial: Data = {
 };
 
 export default function ApplyPage() {
+  const BUSINESS = useBusiness();
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [data, setData] = useState<Data>(initial);
@@ -114,6 +116,9 @@ export default function ApplyPage() {
       
       if (res.ok) {
         setDone(true);
+        const text = `New Application from ${data.name}\nPhone: ${data.phone}\nCountry: ${data.countries.join(', ')}`;
+        const whatsappUrl = \`https://wa.me/\${BUSINESS.phone.replace(/\\D/g, '')}?text=\${encodeURIComponent(text)}\`;
+        window.open(whatsappUrl, '_blank');
       } else {
         alert('Failed to submit application. Please try again.');
       }

@@ -19,7 +19,8 @@ import {
 } from "lucide-react";
 import { useRef, type ReactNode } from "react";
 import { Btn, Counter, Marquee, MaskImage, Reveal, Section, SectionHead, Stagger, StaggerItem } from "@/components/ui";
-import { BUSINESS, HERO_CARDS, MEDIA, PROCESS, STATS, TIMELINE, TRUST_MARQUEE, WHY_US } from "@/data/content";
+import { HERO_CARDS, MEDIA, PROCESS, STATS, TIMELINE, TRUST_MARQUEE, WHY_US } from "@/data/content";
+import { useBusiness } from "@/app/ClientLayout";
 
 const heroIcons: Record<string, ReactNode> = {
   stethoscope: <Stethoscope className="h-4 w-4" />,
@@ -47,6 +48,7 @@ const whyIcons: Record<string, ReactNode> = {
 /* ================================================================== */
 
 export function Hero() {
+  const BUSINESS = useBusiness();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
@@ -197,6 +199,7 @@ export function Hero() {
 /* ================================================================== */
 
 export function TrustBar() {
+  const BUSINESS = useBusiness();
   return (
     <section className="border-b border-ink/[0.06] bg-white py-10">
       <div className="container-x">
@@ -214,6 +217,7 @@ export function TrustBar() {
 /* ================================================================== */
 
 export function AboutSplit() {
+  const BUSINESS = useBusiness();
   return (
     <Section id="about" className="bg-white">
       <div className="container-x grid items-center gap-16 lg:grid-cols-12 lg:gap-20">
@@ -288,6 +292,7 @@ export function AboutSplit() {
 }
 
 export function Timeline() {
+  const BUSINESS = useBusiness();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 75%", "end 60%"] });
   const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
@@ -335,13 +340,14 @@ export function Timeline() {
 /* ================================================================== */
 
 export function WhyChooseUs() {
+  const BUSINESS = useBusiness();
   return (
     <Section className="bg-white">
       <div className="container-x">
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
           <SectionHead
             eyebrow="Why Choose Us"
-            title="Ten reasons families have trusted us for 23 years."
+            title="Ten reasons families have trusted us for past 23 years."
             highlight="trusted"
           />
           <Reveal delay={0.15}>
@@ -375,6 +381,7 @@ export function WhyChooseUs() {
 /* ================================================================== */
 
 export function Process() {
+  const BUSINESS = useBusiness();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 70%", "end 70%"] });
   const width = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
@@ -430,6 +437,7 @@ export function Process() {
 }
 
 export function AchievementBand() {
+  const BUSINESS = useBusiness();
   return (
     <section className="relative overflow-hidden bg-mist py-16">
       <div className="container-x">

@@ -4,12 +4,14 @@ import { CheckCircle2, Clock, Mail, MapPin, MessageCircle, Phone, Send } from "l
 import { useState } from "react";
 import PageHero from "@/components/PageHero";
 import { Btn, Reveal, Section, SectionHead } from "@/components/ui";
-import { BUSINESS, MEDIA } from "@/data/content";
+import { MEDIA } from "@/data/content";
+import { useBusiness } from "@/app/ClientLayout";
 import { cn } from "@/utils/cn";
 
 const interests = ["MBBS in India", "MBBS Abroad", "NEET Counselling", "Scholarship", "Education Loan", "Other"];
 
 export default function ContactPage() {
+  const BUSINESS = useBusiness();
   const [sent, setSent] = useState(false);
   const [interest, setInterest] = useState(interests[0]);
 
@@ -105,15 +107,23 @@ export default function ContactPage() {
                     className="relative space-y-6"
                     onSubmit={(e) => {
                       e.preventDefault();
+                      const formData = new FormData(e.currentTarget);
+                      const name = formData.get('name');
+                      const phone = formData.get('phone');
+                      const email = formData.get('email');
+                      const message = formData.get('message');
+                      const text = \`New Enquiry from \${name}\\nPhone: \${phone}\\nEmail: \${email}\\nInterest: \${interest}\\nMessage: \${message}\`;
+                      const whatsappUrl = \`https://wa.me/\${BUSINESS.phone.replace(/\\D/g, '')}?text=\${encodeURIComponent(text)}\`;
+                      window.open(whatsappUrl, '_blank');
                       setSent(true);
                     }}
                   >
                     <p className="font-display text-[22px] font-semibold text-ink">Book your free counselling</p>
                     <div className="grid gap-5 sm:grid-cols-2">
-                      <Field label="Student Name" placeholder="Full name" required />
-                      <Field label="Phone Number" placeholder="+91 00000 00000" type="tel" required />
-                      <Field label="Email Address" placeholder="you@email.com" type="email" required />
-                      <Field label="City" placeholder="Bhilwara" />
+                      <Field name="name" label="Student Name" placeholder="Full name" required />
+                      <Field name="phone" label="Phone Number" placeholder="+91 00000 00000" type="tel" required />
+                      <Field name="email" label="Email Address" placeholder="you@email.com" type="email" required />
+                      <Field name="city" label="City" placeholder="Bhilwara" />
                     </div>
 
                     <div>
@@ -140,6 +150,7 @@ export default function ContactPage() {
                     <div>
                       <span className="text-[11px] tracking-[0.18em] text-ink uppercase">Message</span>
                       <textarea
+                        name="message"
                         rows={4}
                         placeholder="NEET score, preferred country, budget…"
                         className="mt-2.5 w-full resize-none rounded-2xl border border-ink/10 bg-white px-5 py-4 text-[14px] font-semibold text-ink placeholder:text-ink transition focus:border-brand focus:ring-2 focus:ring-brand/15 focus:outline-none"
@@ -178,11 +189,13 @@ export default function ContactPage() {
 }
 
 function Field({
+  name,
   label,
   placeholder,
   type = "text",
   required,
 }: {
+  name: string;
   label: string;
   placeholder: string;
   type?: string;
@@ -192,6 +205,7 @@ function Field({
     <label className="block">
       <span className="text-[11px] tracking-[0.18em] text-ink uppercase">{label}</span>
       <input
+        name={name}
         type={type}
         required={required}
         placeholder={placeholder}

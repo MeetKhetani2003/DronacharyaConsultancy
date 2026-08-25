@@ -131,7 +131,7 @@ export const TIMELINE = [
 export const WHY_US = [
   { title: "23+ Years Experience", text: "Two decades of admission cycles decoded — we know exactly how ranks, quotas and cut-offs behave.", icon: "history" },
   { title: "Professional Counselling", text: "One-to-one sessions with senior counsellors, never a call-centre script.", icon: "users" },
-  { title: "Scholarship Guidance", text: "Merit, need-based and university scholarships identified and applied for on your behalf.", icon: "award" },
+  { title: "Scholarship Guidance", text: "Merit, NEET-based and university scholarships identified and applied for on your behalf.", icon: "award" },
   { title: "Admission Support", text: "Application filing, registration, choice-filling and seat allotment handled end-to-end.", icon: "clipboard" },
   { title: "Documentation", text: "Attestation, apostille, eligibility certificate, admission letter — flawlessly processed.", icon: "file" },
   { title: "Visa Assistance", text: "Student visa filing, interview prep and embassy coordination with a 99% approval record.", icon: "plane" },

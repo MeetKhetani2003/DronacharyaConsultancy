@@ -4,7 +4,8 @@ import { ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";
 import { Logo, Marquee, Rule } from "@/components/ui";
 import { useRouter } from "next/navigation";
-import { BUSINESS, SERVICES } from "@/data/content";
+import { SERVICES } from "@/data/content";
+import { useBusiness } from "@/app/ClientLayout";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -61,6 +62,7 @@ const socials: { label: string; path: string }[] = [
 ];
 
 export default function Footer() {
+  const BUSINESS = useBusiness();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);

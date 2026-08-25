@@ -18,7 +18,7 @@ import {
   type ReactNode,
 } from "react";
 import { useRouter } from "next/navigation";
-import { BUSINESS } from "@/data/content";
+import { useBusiness } from "@/app/ClientLayout";
 import { cn } from "@/utils/cn";
 
 /* ------------------------------------------------------------------ */
@@ -40,6 +40,7 @@ export function Reveal({
   className?: string;
   once?: boolean;
 }) {
+  const BUSINESS = useBusiness();
   return (
     <motion.div
       className={className}
@@ -62,6 +63,7 @@ export function Stagger({
   className?: string;
   delay?: number;
 }) {
+  const BUSINESS = useBusiness();
   const variants: Variants = {
     hidden: {},
     show: { transition: { staggerChildren: 0.08, delayChildren: delay } },
@@ -85,6 +87,7 @@ export const staggerItem: Variants = {
 };
 
 export function StaggerItem({ children, className }: { children: ReactNode; className?: string }) {
+  const BUSINESS = useBusiness();
   return (
     <motion.div variants={staggerItem} className={className}>
       {children}
@@ -104,6 +107,7 @@ export function TextReveal({
   delay?: number;
   highlight?: string;
 }) {
+  const BUSINESS = useBusiness();
   const words = text.split(" ");
   return (
     <span className={cn("inline-block", className)}>
@@ -144,6 +148,7 @@ export function MaskImage({
   parallax?: number;
   delay?: number;
 }) {
+  const BUSINESS = useBusiness();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [`-${parallax}%`, `${parallax}%`]);
@@ -182,6 +187,7 @@ export function Magnetic({
   strength?: number;
   className?: string;
 }) {
+  const BUSINESS = useBusiness();
   const ref = useRef<HTMLSpanElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -235,6 +241,7 @@ export function Btn({
   type = "button",
   disabled,
 }: BtnProps) {
+  const BUSINESS = useBusiness();
   const router = useRouter();
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([]);
 
@@ -310,6 +317,7 @@ export function Btn({
 /* ------------------------------------------------------------------ */
 
 export function Eyebrow({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
+  const BUSINESS = useBusiness();
   return (
     <Reveal>
       <span
@@ -345,6 +353,7 @@ export function SectionHead({
   align?: "left" | "center";
   className?: string;
 }) {
+  const BUSINESS = useBusiness();
   return (
     <div className={cn(align === "center" && "mx-auto max-w-3xl text-center", "max-w-3xl", className)}>
       {eyebrow && <Eyebrow dark={dark}>{eyebrow}</Eyebrow>}
@@ -378,6 +387,7 @@ export function Section({
   className?: string;
   dark?: boolean;
 }) {
+  const BUSINESS = useBusiness();
   return (
     <section id={id} className={cn("relative py-12 md:py-16 lg:py-20", dark && "bg-ink text-white", className)}>
       {children}
@@ -400,6 +410,7 @@ export function Counter({
   duration?: number;
   className?: string;
 }) {
+  const BUSINESS = useBusiness();
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const [val, setVal] = useState(0);
@@ -427,6 +438,7 @@ export function Counter({
 }
 
 export function Stars({ n = 5, className }: { n?: number; className?: string }) {
+  const BUSINESS = useBusiness();
   return (
     <div className={cn("flex gap-1", className)}>
       {Array.from({ length: n }).map((_, i) => (
@@ -459,6 +471,7 @@ export function Marquee({
   slow?: boolean;
   dark?: boolean;
 }) {
+  const BUSINESS = useBusiness();
   const doubled = [...items, ...items];
   return (
     <div className={cn("mask-fade-x overflow-hidden", className)}>
@@ -588,6 +601,7 @@ export function Lightbox({
 /* ------------------------------------------------------------------ */
 
 export function Logo({ dark = false, compact = false }: { dark?: boolean; compact?: boolean }) {
+  const BUSINESS = useBusiness();
   const router = useRouter();
   return (
     <button
@@ -610,6 +624,7 @@ export function Logo({ dark = false, compact = false }: { dark?: boolean; compac
 
 /* Simple hairline divider with animated draw */
 export function Rule({ dark = false, className }: { dark?: boolean; className?: string }) {
+  const BUSINESS = useBusiness();
   return (
     <motion.div
       initial={{ scaleX: 0 }}

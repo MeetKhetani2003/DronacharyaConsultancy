@@ -1,7 +1,7 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState, useRef, type ReactNode } from "react";
-import { getTestimonials } from '@/app/admin/dashboard/actions';
+import { getTestimonials, getUniversities, getFaqs, getEvents } from '@/app/admin/dashboard/actions';
 import {
   ArrowLeft,
   ArrowRight,
@@ -42,19 +42,8 @@ import {
   StaggerItem,
   Stars,
 } from "@/components/ui";
-import {
-  BUSINESS,
-  COUNTRIES,
-  FAQS,
-  INDIA_TRACKS,
-  MEDIA,
-  NEWS,
-  NEWSPAPERS,
-  SCHOLARSHIPS,
-  SERVICES,
-  SUCCESS_STORIES,
-  UNIVERSITIES,
-} from "@/data/content";
+import { COUNTRIES, FAQS, INDIA_TRACKS, MEDIA, NEWS, NEWSPAPERS, SCHOLARSHIPS, SERVICES, SUCCESS_STORIES, UNIVERSITIES } from "@/data/content";
+import { useBusiness } from "@/app/ClientLayout";
 import { useRouter } from "next/navigation";
 import { cn } from "@/utils/cn";
 
@@ -81,6 +70,7 @@ const svcIcons: Record<string, ReactNode> = {
 /* ================================================================== */
 
 export function Countries({ full = false }: { full?: boolean }) {
+  const BUSINESS = useBusiness();
   const router = useRouter();
   const list = full ? COUNTRIES : COUNTRIES.slice(0, 8);
   return (
@@ -150,6 +140,7 @@ export function Countries({ full = false }: { full?: boolean }) {
 /* ================================================================== */
 
 export function IndiaTracks() {
+  const BUSINESS = useBusiness();
   const [active, setActive] = useState(0);
   return (
     <Section id="mbbs-india" className="bg-mist">
@@ -228,6 +219,7 @@ export function IndiaTracks() {
 /* ================================================================== */
 
 export function Services() {
+  const BUSINESS = useBusiness();
   return (
     <Section id="services" className="bg-white">
       <div className="container-x">
@@ -282,7 +274,18 @@ export function Services() {
 /* ================================================================== */
 
 export function SuccessStories() {
+  const BUSINESS = useBusiness();
   const [open, setOpen] = useState<number | null>(null);
+  const [eventsList, setEventsList] = useState<any[]>([]);
+
+  useEffect(() => {
+    getEvents().then((res) => {
+      if (res.success && res.data) setEventsList(res.data);
+    });
+  }, []);
+
+  const list = eventsList.length > 0 ? eventsList : SUCCESS_STORIES;
+
   return (
     <Section className="bg-mist">
       <div className="container-x">
@@ -300,13 +303,12 @@ export function SuccessStories() {
         </div>
 
         <div className="mt-2 columns-1 gap-5 sm:columns-2 lg:columns-3 [&>*]:mb-5">
-          {SUCCESS_STORIES.map((s, i) => (
-            <Reveal key={s.title} delay={(i % 3) * 0.08}>
+          {list.map((s, i) => (
+            <Reveal key={s.title + i} delay={(i % 3) * 0.08}>
               <button
                 onClick={() => setOpen(i)}
                 className={cn(
-                  "img-zoom group relative block w-full overflow-hidden rounded-3xl border border-ink/[0.06] text-left",
-                  s.span === "tall" ? "aspect-[3/4]" : s.span === "wide" ? "aspect-[16/10]" : "aspect-[4/3]",
+                  "img-zoom group relative block w-full overflow-hidden rounded-3xl border border-ink/[0.06] text-left aspect-[4/3]"
                 )}
               >
                 <img src={s.image} alt={s.title} loading="lazy" className="h-full w-full object-cover" />
@@ -321,7 +323,7 @@ export function SuccessStories() {
         </div>
       </div>
       <Lightbox
-        items={SUCCESS_STORIES.map((s) => ({ src: s.image, title: s.title, category: s.place }))}
+        items={list.map((s) => ({ src: s.image, title: s.title, category: s.place }))}
         index={open}
         onClose={() => setOpen(null)}
         onIndex={setOpen}
@@ -335,6 +337,7 @@ export function SuccessStories() {
 /* ================================================================== */
 
 export function Newspapers() {
+  const BUSINESS = useBusiness();
   const [open, setOpen] = useState<number | null>(null);
   return (
     <Section className="bg-white">
@@ -384,6 +387,7 @@ export function Newspapers() {
 /* ================================================================== */
 
 export function Testimonials() {
+  const BUSINESS = useBusiness();
   const [i, setI] = useState(0);
   const [testimonialsList, setTestimonialsList] = useState<any[]>([]);
 
@@ -507,9 +511,19 @@ export function Testimonials() {
 /* ================================================================== */
 
 export function Universities() {
+  const BUSINESS = useBusiness();
   const rail = useRef<HTMLDivElement>(null);
   const scrollBy = (d: number) => rail.current?.scrollBy({ left: d * 420, behavior: "smooth" });
   const [open, setOpen] = useState<number | null>(null);
+  const [universitiesList, setUniversitiesList] = useState<any[]>([]);
+
+  useEffect(() => {
+    getUniversities().then(res => {
+      if (res.success && res.data) setUniversitiesList(res.data);
+    });
+  }, []);
+
+  if (universitiesList.length === 0) return null;
 
   return (
     <Section id="universities" className="overflow-hidden bg-white">
@@ -546,7 +560,7 @@ export function Universities() {
         style={{ paddingInline: "max(1.5rem, calc((100vw - 1280px) / 2 + 2.5rem))" }}
         className="hide-scrollbar mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4"
       >
-        {UNIVERSITIES.map((u, i) => (
+        {universitiesList.map((u, i) => (
           <motion.article
             key={u.name}
             initial={{ opacity: 0, y: 26 }}
@@ -562,19 +576,19 @@ export function Universities() {
               <img src={u.image} alt={u.name} loading="lazy" className="h-full w-full object-cover" />
             </button>
             <div className="p-7">
-              <p className="text-[11px] tracking-[0.18em] text-brand uppercase">{u.rank}</p>
+
               <h3 className="font-display mt-3 min-h-[52px] text-[18px] leading-snug font-medium text-ink">{u.name}</h3>
               <Rule className="my-5" />
               <div className="flex items-center justify-between text-[12.5px]">
                 <span className="font-semibold text-ink">{u.recognition}</span>
-                <span className="font-medium text-ink">{u.fees}</span>
+
               </div>
             </div>
           </motion.article>
         ))}
       </div>
       <Lightbox
-        items={UNIVERSITIES.map((u) => ({ src: u.image, title: u.name, category: `${u.flag} ${u.country}` }))}
+        items={universitiesList.map((u) => ({ src: u.image, title: u.name, category: `${u.flag} ${u.country}` }))}
         index={open}
         onClose={() => setOpen(null)}
         onIndex={setOpen}
@@ -588,6 +602,7 @@ export function Universities() {
 /* ================================================================== */
 
 export function Scholarships() {
+  const BUSINESS = useBusiness();
   return (
     <Section id="scholarships" dark className="overflow-hidden">
       <div className="grid-lines-dark absolute inset-0 opacity-40" />
@@ -671,6 +686,7 @@ export function Scholarships() {
 /* ================================================================== */
 
 export function LatestNews({ limit = 3 }: { limit?: number }) {
+  const BUSINESS = useBusiness();
   return (
     <Section id="news" className="bg-white">
       <div className="container-x">
@@ -722,8 +738,19 @@ export function LatestNews({ limit = 3 }: { limit?: number }) {
 /* ================================================================== */
 
 export function Faq({ compact = false }: { compact?: boolean }) {
+  const BUSINESS = useBusiness();
   const [open, setOpen] = useState<number | null>(0);
-  const list = compact ? FAQS.slice(0, 6) : FAQS;
+  const [faqList, setFaqList] = useState<any[]>([]);
+
+  useEffect(() => {
+    getFaqs().then((res) => {
+      if (res.success && res.data) {
+        setFaqList(compact ? res.data.slice(0, 6) : res.data);
+      }
+    });
+  }, [compact]);
+
+  const list = faqList.length > 0 ? faqList : (compact ? FAQS.slice(0, 6) : FAQS);
 
   return (
     <Section id="faq" className="bg-mist">
@@ -820,6 +847,7 @@ export function Faq({ compact = false }: { compact?: boolean }) {
 /* ================================================================== */
 
 export function FinalCta() {
+  const BUSINESS = useBusiness();
   return (
     <section className="relative overflow-hidden bg-ink py-24 md:py-32">
       <div className="absolute inset-0 opacity-25">

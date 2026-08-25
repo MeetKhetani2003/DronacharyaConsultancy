@@ -4,11 +4,13 @@ import { ArrowUpRight, Calendar, Mail, Menu, Phone, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Btn, Logo } from "@/components/ui";
-import { BUSINESS, NAV } from "@/data/content";
+import { NAV } from "@/data/content";
+import { useBusiness } from "@/app/ClientLayout";
 import { useRoute } from "@/lib/router";
 import { cn } from "@/utils/cn";
 
 export default function Navbar() {
+  const BUSINESS = useBusiness();
   const path = useRoute();
   const router = useRouter();
   const { scrollY } = useScroll();
