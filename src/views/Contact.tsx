@@ -67,7 +67,7 @@ export default function ContactPage() {
                     <Clock className="h-4 w-4 text-brand" /> Office Hours
                   </span>
                   <div className="mt-4 space-y-2">
-                    {BUSINESS.hours.map((h) => (
+                    {BUSINESS.hours.map((h: { day: string; time: string }) => (
                       <div key={h.day} className="flex items-center justify-between text-[13.5px] font-semibold text-ink">
                         <span>{h.day}</span>
                         <span className="text-ink">{h.time}</span>
@@ -112,8 +112,8 @@ export default function ContactPage() {
                       const phone = formData.get('phone');
                       const email = formData.get('email');
                       const message = formData.get('message');
-                      const text = \`New Enquiry from \${name}\\nPhone: \${phone}\\nEmail: \${email}\\nInterest: \${interest}\\nMessage: \${message}\`;
-                      const whatsappUrl = \`https://wa.me/\${BUSINESS.phone.replace(/\\D/g, '')}?text=\${encodeURIComponent(text)}\`;
+                      const text = `New Enquiry from ${name}\nPhone: ${phone}\nEmail: ${email}\nInterest: ${interest}\nMessage: ${message}`;
+                      const whatsappUrl = `https://wa.me/${BUSINESS.phone.replace(/\D/g, '')}?text=${encodeURIComponent(text as string)}`;
                       window.open(whatsappUrl, '_blank');
                       setSent(true);
                     }}

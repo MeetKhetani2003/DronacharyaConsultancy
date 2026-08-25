@@ -259,15 +259,7 @@ export async function updateEvent(id: string, formData: FormData) {
     return { success: true };
   } catch (error) { return { error: 'Failed to update event' }; }
 }
-export async function updatePageContent(id: string, formData: FormData) {
-  try {
-    await connectToDatabase();
-    const data = Object.fromEntries(formData);
-    await PageContent.findByIdAndUpdate(id, data);
-    revalidatePath('/', 'layout');
-    return { success: true };
-  } catch (error) { return { error: 'Failed to update page content' }; }
-}
+
 export async function updateContactDetail(id: string, formData: FormData) {
   try {
     await connectToDatabase();

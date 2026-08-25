@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     return new Promise<NextResponse>((resolve) => {
       const uploadStream = bucket.openUploadStream(filename, {
         contentType: file.type || 'image/jpeg',
-      });
+      } as any);
 
       uploadStream.end(buffer);
 

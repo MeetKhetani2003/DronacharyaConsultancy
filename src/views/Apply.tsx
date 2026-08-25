@@ -117,7 +117,7 @@ export default function ApplyPage() {
       if (res.ok) {
         setDone(true);
         const text = `New Application from ${data.name}\nPhone: ${data.phone}\nCountry: ${data.countries.join(', ')}`;
-        const whatsappUrl = \`https://wa.me/\${BUSINESS.phone.replace(/\\D/g, '')}?text=\${encodeURIComponent(text)}\`;
+        const whatsappUrl = `https://wa.me/${BUSINESS.phone.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`;
         window.open(whatsappUrl, '_blank');
       } else {
         alert('Failed to submit application. Please try again.');
