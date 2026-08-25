@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Image as ImageIcon, MessageSquare, Trash2, LogOut, Edit2, Loader2, Plus, HelpCircle, Calendar, Phone, Settings } from 'lucide-react';
-import { getMedia, deleteMedia, getTestimonials, deleteTestimonial, createTestimonial, getFaqs, createFaq, deleteFaq, getEvents, createEvent, deleteEvent, getUniversities, createUniversity, deleteUniversity, updateTestimonial, updateUniversity, updateFaq, updateEvent, getContactDetails, createContactDetail, deleteContactDetail, updateContactDetail } from './actions';
+import { getMedia, deleteMedia, createMedia, getTestimonials, deleteTestimonial, createTestimonial, getFaqs, createFaq, deleteFaq, getEvents, createEvent, deleteEvent, getUniversities, createUniversity, deleteUniversity, updateTestimonial, updateUniversity, updateFaq, updateEvent, getContactDetails, createContactDetail, deleteContactDetail, updateContactDetail } from './actions';
 import { Btn } from '@/components/ui';
 
 const getYouTubeId = (url: string) => {
@@ -89,13 +89,42 @@ export default function AdminDashboard() {
     setError('');
     const formData = new FormData(e.currentTarget);
     try {
-      const res = await fetch('/api/upload', { method: 'POST', body: formData });
-      const data = await res.json();
-      if (data.success) {
+      let src = '';
+      if (uploadType === 'file') {
+        const file = formData.get('file');
+        if (!file || (file as File).size === 0) {
+           setError('Please select a file');
+           setUploading(false);
+           return;
+        }
+        
+        const uploadData = new FormData();
+        uploadData.append('file', file);
+        
+        const res = await fetch('/api/upload', { method: 'POST', body: uploadData });
+        const data = await res.json();
+        if (data.success) {
+          src = data.url;
+        } else {
+          setError(data.error || 'Upload failed');
+          setUploading(false);
+          return;
+        }
+      } else {
+        src = formData.get('link') as string;
+      }
+      
+      const mediaData = new FormData();
+      mediaData.append('title', formData.get('title') as string);
+      mediaData.append('category', formData.get('category') as string);
+      mediaData.append('src', src);
+      
+      const res = await createMedia(mediaData);
+      if (res.success) {
         (e.target as HTMLFormElement).reset();
         fetchData();
       } else {
-        setError(data.error || 'Upload failed');
+        setError(res.error || 'Failed to save media');
       }
     } catch (err) {
       setError('An error occurred during upload.');

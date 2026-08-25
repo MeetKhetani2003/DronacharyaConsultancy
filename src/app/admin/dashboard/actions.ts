@@ -67,12 +67,28 @@ export async function getMedia() {
 export async function deleteMedia(id: string) {
   try {
     await connectToDatabase();
-    // We ideally should also delete the file from the filesystem here, but we'll keep it simple for now and just remove the DB record.
     await Media.findByIdAndDelete(id);
     revalidatePath('/', 'layout');
     return { success: true };
   } catch (error) {
     return { error: 'Failed to delete media' };
+  }
+}
+
+export async function createMedia(formData: FormData) {
+  try {
+    await connectToDatabase();
+    const title = formData.get('title') as string;
+    const category = formData.get('category') as string;
+    const src = formData.get('src') as string;
+
+    if (!title || !category || !src) return { error: 'Missing fields' };
+    
+    await new Media({ title, category, src }).save();
+    revalidatePath('/', 'layout');
+    return { success: true };
+  } catch (error) {
+    return { error: 'Failed to create media' };
   }
 }
 
@@ -226,46 +242,74 @@ export async function deleteUniversity(id: string) {
 export async function updateTestimonial(id: string, formData: FormData) {
   try {
     await connectToDatabase();
-    const data = Object.fromEntries(formData);
-    await Testimonial.findByIdAndUpdate(id, data);
+    const name = formData.get('name') as string;
+    const university = formData.get('university') as string;
+    const quote = formData.get('quote') as string;
+    const image = formData.get('image') as string;
+    
+    const updateData: any = { name, university, quote };
+    if (image) updateData.image = image;
+    
+    await Testimonial.findByIdAndUpdate(id, updateData);
     revalidatePath('/', 'layout');
     return { success: true };
-  } catch (error) { return { error: 'Failed to update testimonial' }; }
+  } catch (error: any) { return { error: 'Failed to update testimonial: ' + error.message }; }
 }
+
 export async function updateUniversity(id: string, formData: FormData) {
   try {
     await connectToDatabase();
-    const data = Object.fromEntries(formData);
-    await University.findByIdAndUpdate(id, data);
+    const name = formData.get('name') as string;
+    const country = formData.get('country') as string;
+    const flag = formData.get('flag') as string;
+    const rank = formData.get('rank') as string;
+    const recognition = formData.get('recognition') as string;
+    const fees = formData.get('fees') as string;
+    const image = formData.get('image') as string;
+    
+    const updateData: any = { name, country, flag, rank, recognition, fees };
+    if (image) updateData.image = image;
+    
+    await University.findByIdAndUpdate(id, updateData);
     revalidatePath('/', 'layout');
     return { success: true };
-  } catch (error) { return { error: 'Failed to update university' }; }
+  } catch (error: any) { return { error: 'Failed to update university: ' + error.message }; }
 }
+
 export async function updateFaq(id: string, formData: FormData) {
   try {
     await connectToDatabase();
-    const data = Object.fromEntries(formData);
-    await Faq.findByIdAndUpdate(id, data);
+    const q = formData.get('q') as string;
+    const a = formData.get('a') as string;
+    await Faq.findByIdAndUpdate(id, { q, a });
     revalidatePath('/', 'layout');
     return { success: true };
-  } catch (error) { return { error: 'Failed to update faq' }; }
+  } catch (error: any) { return { error: 'Failed to update faq: ' + error.message }; }
 }
+
 export async function updateEvent(id: string, formData: FormData) {
   try {
     await connectToDatabase();
-    const data = Object.fromEntries(formData);
-    await Event.findByIdAndUpdate(id, data);
+    const title = formData.get('title') as string;
+    const place = formData.get('place') as string;
+    const image = formData.get('image') as string;
+    
+    const updateData: any = { title, place };
+    if (image) updateData.image = image;
+    
+    await Event.findByIdAndUpdate(id, updateData);
     revalidatePath('/', 'layout');
     return { success: true };
-  } catch (error) { return { error: 'Failed to update event' }; }
+  } catch (error: any) { return { error: 'Failed to update event: ' + error.message }; }
 }
 
 export async function updateContactDetail(id: string, formData: FormData) {
   try {
     await connectToDatabase();
-    const data = Object.fromEntries(formData);
-    await ContactDetail.findByIdAndUpdate(id, data);
+    const key = formData.get('key') as string;
+    const value = formData.get('value') as string;
+    await ContactDetail.findByIdAndUpdate(id, { key, value });
     revalidatePath('/', 'layout');
     return { success: true };
-  } catch (error) { return { error: 'Failed to update contact detail' }; }
+  } catch (error: any) { return { error: 'Failed to update contact detail: ' + error.message }; }
 }
