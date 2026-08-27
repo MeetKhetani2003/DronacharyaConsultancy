@@ -168,7 +168,7 @@ export const COUNTRIES: Country[] = [
   {
     name: "India",
     flag: "🇮🇳",
-    image: MEDIA.uni5,
+    image: "https://images.pexels.com/photos/2566121/pexels-photo-2566121.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
     fees: "₹6 – 25 Lakh (Total)",
     duration: "4.5 Years + 1 Year Internship",
     eligibility: "NEET Qualified • 50% in PCB",
@@ -254,6 +254,19 @@ export const COUNTRIES: Country[] = [
     medium: "English",
     highlight: "UK-affiliated programmes, Indian cuisine and culture, and an English-speaking island campus.",
     intake: "Feb & Sep",
+  },
+  {
+    name: "Uzbekistan",
+    flag: "🇺🇿",
+    image:
+      "https://images.pexels.com/photos/3225528/pexels-photo-3225528.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
+    fees: "₹14 – 20 Lakh (Total)",
+    duration: "5 Years + 1 Year Internship",
+    eligibility: "NEET Qualified • 50% in PCB",
+    recognition: "NMC | WHO | WDOMS",
+    medium: "English",
+    highlight: "High-quality medical education with affordable tuition fees and a secure environment for international students.",
+    intake: "Sep – Oct",
   },
 ];
 

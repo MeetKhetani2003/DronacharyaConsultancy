@@ -8,6 +8,8 @@ import Testimonial from '@/models/Testimonial';
 import Faq from '@/models/Faq';
 import Event from '@/models/Event';
 import ContactDetail from '@/models/ContactDetail';
+import { Country } from '@/models/Country';
+import { Course } from '@/models/Course';
 
 // TESTIMONIALS
 export async function createTestimonial(formData: FormData) {
@@ -312,4 +314,127 @@ export async function updateContactDetail(id: string, formData: FormData) {
     revalidatePath('/', 'layout');
     return { success: true };
   } catch (error: any) { return { error: 'Failed to update contact detail: ' + error.message }; }
+}
+
+// COUNTRIES
+export async function createCountry(formData: FormData) {
+  try {
+    await connectToDatabase();
+    const name = formData.get('name') as string;
+    const flag = formData.get('flag') as string;
+    const fees = formData.get('fees') as string;
+    const duration = formData.get('duration') as string;
+    const eligibility = formData.get('eligibility') as string;
+    const recognition = formData.get('recognition') as string;
+    const medium = formData.get('medium') as string;
+    const highlight = formData.get('highlight') as string;
+    const intake = formData.get('intake') as string;
+    const image = formData.get('image') as string;
+
+    if (!name || !flag || !image) return { error: 'Missing required fields' };
+    await new Country({ name, flag, fees, duration, eligibility, recognition, medium, highlight, intake, image }).save();
+    revalidatePath('/', 'layout');
+    return { success: true };
+  } catch (error) {
+    return { error: 'Failed to create country' };
+  }
+}
+
+export async function getCountries() {
+  try {
+    await connectToDatabase();
+    const data = await Country.find().lean();
+    return { success: true, data: JSON.parse(JSON.stringify(data)) };
+  } catch (error) {
+    return { error: 'Failed to fetch countries' };
+  }
+}
+
+export async function deleteCountry(id: string) {
+  try {
+    await connectToDatabase();
+    await Country.findByIdAndDelete(id);
+    revalidatePath('/', 'layout');
+    return { success: true };
+  } catch (error) {
+    return { error: 'Failed to delete country' };
+  }
+}
+
+export async function updateCountry(id: string, formData: FormData) {
+  try {
+    await connectToDatabase();
+    const name = formData.get('name') as string;
+    const flag = formData.get('flag') as string;
+    const fees = formData.get('fees') as string;
+    const duration = formData.get('duration') as string;
+    const eligibility = formData.get('eligibility') as string;
+    const recognition = formData.get('recognition') as string;
+    const medium = formData.get('medium') as string;
+    const highlight = formData.get('highlight') as string;
+    const intake = formData.get('intake') as string;
+    const image = formData.get('image') as string;
+    
+    const updateData: any = { name, flag, fees, duration, eligibility, recognition, medium, highlight, intake };
+    if (image) updateData.image = image;
+    
+    await Country.findByIdAndUpdate(id, updateData);
+    revalidatePath('/', 'layout');
+    return { success: true };
+  } catch (error: any) { return { error: 'Failed to update country: ' + error.message }; }
+}
+
+// COURSES
+export async function createCourse(formData: FormData) {
+  try {
+    await connectToDatabase();
+    const title = formData.get('title') as string;
+    const description = formData.get('description') as string;
+    const href = formData.get('href') as string;
+    const icon = formData.get('icon') as string;
+    const category = formData.get('category') as string;
+
+    if (!title || !description || !href) return { error: 'Missing required fields' };
+    await new Course({ title, description, href, icon, category }).save();
+    revalidatePath('/', 'layout');
+    return { success: true };
+  } catch (error) {
+    return { error: 'Failed to create course' };
+  }
+}
+
+export async function getCourses() {
+  try {
+    await connectToDatabase();
+    const data = await Course.find().lean();
+    return { success: true, data: JSON.parse(JSON.stringify(data)) };
+  } catch (error) {
+    return { error: 'Failed to fetch courses' };
+  }
+}
+
+export async function deleteCourse(id: string) {
+  try {
+    await connectToDatabase();
+    await Course.findByIdAndDelete(id);
+    revalidatePath('/', 'layout');
+    return { success: true };
+  } catch (error) {
+    return { error: 'Failed to delete course' };
+  }
+}
+
+export async function updateCourse(id: string, formData: FormData) {
+  try {
+    await connectToDatabase();
+    const title = formData.get('title') as string;
+    const description = formData.get('description') as string;
+    const href = formData.get('href') as string;
+    const icon = formData.get('icon') as string;
+    const category = formData.get('category') as string;
+    
+    await Course.findByIdAndUpdate(id, { title, description, href, icon, category });
+    revalidatePath('/', 'layout');
+    return { success: true };
+  } catch (error: any) { return { error: 'Failed to update course: ' + error.message }; }
 }

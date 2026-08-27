@@ -169,6 +169,16 @@ export function MbbsAbroadPage() {
 /* ------------------------------------------------------------------ */
 
 export function CountriesPage() {
+  const [countriesList, setCountriesList] = useState<any[]>([]);
+
+  useEffect(() => {
+    getCountries().then((res) => {
+      if (res.success && res.data) setCountriesList(res.data);
+    });
+  }, []);
+
+  const list = countriesList.length > 0 ? countriesList : COUNTRIES;
+
   return (
     <>
       <PageHero
@@ -196,7 +206,7 @@ export function CountriesPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {COUNTRIES.map((c) => (
+                  {list.map((c) => (
                     <tr key={c.name} className="border-b border-ink/[0.05] transition-colors last:border-0 hover:bg-mist/60">
                       <td className="px-6 py-5 font-display text-[15px] font-medium text-ink">
                         {c.flag} {c.name}

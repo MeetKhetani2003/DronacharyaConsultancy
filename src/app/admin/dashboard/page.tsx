@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Image as ImageIcon, MessageSquare, Trash2, LogOut, Edit2, Loader2, Plus, HelpCircle, Calendar, Phone, Settings } from 'lucide-react';
-import { getMedia, deleteMedia, createMedia, getTestimonials, deleteTestimonial, createTestimonial, getFaqs, createFaq, deleteFaq, getEvents, createEvent, deleteEvent, getUniversities, createUniversity, deleteUniversity, updateTestimonial, updateUniversity, updateFaq, updateEvent, getContactDetails, createContactDetail, deleteContactDetail, updateContactDetail } from './actions';
+import { Image as ImageIcon, MessageSquare, Trash2, LogOut, Edit2, Loader2, Plus, HelpCircle, Calendar, Phone, Settings, Globe, BookOpen } from 'lucide-react';
+import { getMedia, deleteMedia, createMedia, getTestimonials, deleteTestimonial, createTestimonial, getFaqs, createFaq, deleteFaq, getEvents, createEvent, deleteEvent, getUniversities, createUniversity, deleteUniversity, updateTestimonial, updateUniversity, updateFaq, updateEvent, getContactDetails, createContactDetail, deleteContactDetail, updateContactDetail, getCountries, createCountry, deleteCountry, updateCountry, getCourses, createCourse, deleteCourse, updateCourse } from './actions';
 import { Btn } from '@/components/ui';
 
 const getYouTubeId = (url: string) => {
@@ -12,7 +12,7 @@ const getYouTubeId = (url: string) => {
   return match ? match[1] : null;
 };
 
-type TabType = 'media' | 'testimonials' | 'universities' | 'faqs' | 'events' | 'contact';
+type TabType = 'media' | 'testimonials' | 'universities' | 'faqs' | 'events' | 'contact' | 'countries' | 'courses';
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<TabType>('media');
@@ -38,6 +38,8 @@ export default function AdminDashboard() {
     else if (activeTab === 'faqs') res = await getFaqs();
     else if (activeTab === 'events') res = await getEvents();
     else if (activeTab === 'contact') res = await getContactDetails();
+    else if (activeTab === 'countries') res = await getCountries();
+    else if (activeTab === 'courses') res = await getCourses();
 
     if (res?.success) setData(res.data || []);
     setLoading(false);
@@ -158,6 +160,8 @@ export default function AdminDashboard() {
     { id: 'faqs', label: 'FAQs', icon: <HelpCircle className="w-5 h-5" /> },
     { id: 'events', label: 'Events', icon: <Calendar className="w-5 h-5" /> },
     { id: 'contact', label: 'Contact Details', icon: <Phone className="w-5 h-5" /> },
+    { id: 'countries', label: 'Countries', icon: <Globe className="w-5 h-5" /> },
+    { id: 'courses', label: 'Courses', icon: <BookOpen className="w-5 h-5" /> },
   ];
 
   return (
@@ -231,12 +235,12 @@ export default function AdminDashboard() {
         )}
 
         {/* Dynamic tabs using a similar layout mapping */}
-        {['testimonials', 'universities', 'faqs', 'events', 'contact'].includes(activeTab) && (
+        {['testimonials', 'universities', 'faqs', 'events', 'contact', 'countries', 'courses'].includes(activeTab) && (
           <div className="space-y-8">
             {(activeTab !== 'contact' || editingItem) && (
               <div className="bg-white p-6 rounded-3xl border border-ink/5 shadow-sm">
               <h2 className="font-display text-xl font-bold mb-4">{editingItem ? 'Edit' : 'Add'} {activeTab.replace(/s$/, '')}</h2>
-              <form key={editingItem ? editingItem._id : 'new'} onSubmit={(e) => handleGenericSubmit(e, activeTab === 'testimonials' ? createTestimonial : activeTab === 'universities' ? createUniversity : activeTab === 'faqs' ? createFaq : activeTab === 'events' ? createEvent : createContactDetail, activeTab === 'testimonials' ? updateTestimonial : activeTab === 'universities' ? updateUniversity : activeTab === 'faqs' ? updateFaq : activeTab === 'events' ? updateEvent : updateContactDetail)} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <form key={editingItem ? editingItem._id : 'new'} onSubmit={(e) => handleGenericSubmit(e, activeTab === 'testimonials' ? createTestimonial : activeTab === 'universities' ? createUniversity : activeTab === 'faqs' ? createFaq : activeTab === 'events' ? createEvent : activeTab === 'countries' ? createCountry : activeTab === 'courses' ? createCourse : createContactDetail, activeTab === 'testimonials' ? updateTestimonial : activeTab === 'universities' ? updateUniversity : activeTab === 'faqs' ? updateFaq : activeTab === 'events' ? updateEvent : activeTab === 'countries' ? updateCountry : activeTab === 'courses' ? updateCourse : updateContactDetail)} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 
                 {activeTab === 'testimonials' && (
                   <>
@@ -289,6 +293,34 @@ export default function AdminDashboard() {
                   </>
                 )}
 
+                {activeTab === 'countries' && (
+                  <>
+                    <input name="name" placeholder="Name" required defaultValue={editingItem?.name || ''} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                    <input name="flag" placeholder="Flag Emoji" required defaultValue={editingItem?.flag || ''} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                    <input name="fees" placeholder="Fees" required defaultValue={editingItem?.fees || ''} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                    <input name="duration" placeholder="Duration" required defaultValue={editingItem?.duration || ''} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                    <input name="eligibility" placeholder="Eligibility" required defaultValue={editingItem?.eligibility || ''} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                    <input name="recognition" placeholder="Recognition" required defaultValue={editingItem?.recognition || ''} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                    <input name="medium" placeholder="Medium" required defaultValue={editingItem?.medium || ''} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                    <input name="intake" placeholder="Intake" required defaultValue={editingItem?.intake || ''} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                    <textarea name="highlight" placeholder="Highlight" required defaultValue={editingItem?.highlight || ''} rows={3} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 md:col-span-2 outline-none" />
+                    <div className="md:col-span-2 flex flex-col md:flex-row gap-4">
+                      <input name="image" placeholder="Image URL (leave blank if uploading)" defaultValue={editingItem?.image || ''} className="flex-1 bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                      <input type="file" name="imageFile" accept="image/*" className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                    </div>
+                  </>
+                )}
+
+                {activeTab === 'courses' && (
+                  <>
+                    <input name="title" placeholder="Title" required defaultValue={editingItem?.title || ''} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                    <input name="category" placeholder="Category (e.g. General, MBBS, Medical)" required defaultValue={editingItem?.category || 'General'} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                    <input name="href" placeholder="Link / Href" required defaultValue={editingItem?.href || ''} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                    <input name="icon" placeholder="Icon Name" defaultValue={editingItem?.icon || ''} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 outline-none" />
+                    <textarea name="description" placeholder="Description" required defaultValue={editingItem?.description || ''} rows={3} className="bg-mist border border-ink/10 rounded-xl px-4 py-3 md:col-span-2 outline-none" />
+                  </>
+                )}
+
                 {editingItem && (
                   <button type="button" onClick={() => setEditingItem(null)} className="bg-mist text-ink font-bold py-3 rounded-xl hover:bg-ink/10 flex justify-center items-center gap-2">
                     Cancel Edit
@@ -311,7 +343,7 @@ export default function AdminDashboard() {
                         <Edit2 className="w-5 h-5" />
                       </button>
                       {activeTab !== 'contact' && (
-                        <button onClick={() => handleDelete(item._id, activeTab === 'testimonials' ? deleteTestimonial : activeTab === 'universities' ? deleteUniversity : activeTab === 'faqs' ? deleteFaq : activeTab === 'events' ? deleteEvent : deleteContactDetail)} className="absolute top-4 right-4 text-error/40 hover:text-error transition-colors">
+                        <button onClick={() => handleDelete(item._id, activeTab === 'testimonials' ? deleteTestimonial : activeTab === 'universities' ? deleteUniversity : activeTab === 'faqs' ? deleteFaq : activeTab === 'events' ? deleteEvent : activeTab === 'countries' ? deleteCountry : activeTab === 'courses' ? deleteCourse : deleteContactDetail)} className="absolute top-4 right-4 text-error/40 hover:text-error transition-colors">
                           <Trash2 className="w-5 h-5" />
                         </button>
                       )}
@@ -357,6 +389,25 @@ export default function AdminDashboard() {
                         <div className="flex flex-col gap-1 pr-16">
                           <p className="font-bold text-sm capitalize">{item.key}</p>
                           <p className="text-xs text-ink/70">{item.value}</p>
+                        </div>
+                      )}
+                      
+                      {activeTab === 'countries' && (
+                        <div className="flex items-center gap-4 pr-16">
+                          <img src={item.image} alt={item.name} className="w-16 h-16 rounded-lg object-cover bg-mist shrink-0" />
+                          <div className="overflow-hidden">
+                            <p className="font-bold text-sm truncate">{item.flag} {item.name}</p>
+                            <p className="text-xs text-ink/60 mt-1">{item.duration} • {item.intake}</p>
+                            <p className="text-xs font-semibold text-brand mt-1">{item.fees}</p>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {activeTab === 'courses' && (
+                        <div className="flex flex-col gap-1 pr-16">
+                          <p className="font-bold text-sm truncate">{item.title}</p>
+                          <p className="text-xs text-ink/70 line-clamp-2">{item.description}</p>
+                          <p className="text-xs text-brand font-mono mt-1">{item.href}</p>
                         </div>
                       )}
                     </div>

@@ -1,7 +1,7 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState, useRef, type ReactNode } from "react";
-import { getTestimonials, getUniversities, getFaqs, getEvents } from '@/app/admin/dashboard/actions';
+import { getTestimonials, getUniversities, getFaqs, getEvents, getCountries } from '@/app/admin/dashboard/actions';
 import {
   ArrowLeft,
   ArrowRight,
@@ -72,7 +72,15 @@ const svcIcons: Record<string, ReactNode> = {
 export function Countries({ full = false }: { full?: boolean }) {
   const BUSINESS = useBusiness();
   const router = useRouter();
-  const list = full ? COUNTRIES : COUNTRIES.slice(0, 8);
+  const [countriesList, setCountriesList] = useState<any[]>([]);
+
+  useEffect(() => {
+    getCountries().then((res) => {
+      if (res.success && res.data) setCountriesList(res.data);
+    });
+  }, []);
+
+  const list = countriesList.length > 0 ? (full ? countriesList : countriesList.slice(0, 8)) : (full ? COUNTRIES : COUNTRIES.slice(0, 8));
   return (
     <Section id="countries" className="bg-white">
       <div className="container-x">

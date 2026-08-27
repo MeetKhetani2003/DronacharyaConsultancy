@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Btn, Logo } from "@/components/ui";
 import { NAV } from "@/data/content";
+import { getCourses } from "@/app/admin/dashboard/actions";
 import { useBusiness } from "@/app/ClientLayout";
 import { useRoute } from "@/lib/router";
 import { cn } from "@/utils/cn";
@@ -17,6 +18,22 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState<string | null>(null);
   const [mobile, setMobile] = useState(false);
+  const [navItems, setNavItems] = useState(NAV);
+
+  useEffect(() => {
+    getCourses().then((res) => {
+      if (res.success && res.data && res.data.length > 0) {
+        const dynamicCourses = res.data.map((c: any) => ({
+          label: c.title,
+          href: c.href,
+          desc: c.description,
+        }));
+        setNavItems((prev) =>
+          prev.map((item) => (item.label === "Courses" ? { ...item, children: dynamicCourses } : item))
+        );
+      }
+    });
+  }, []);
 
 
   useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 40));
@@ -77,7 +94,7 @@ export default function Navbar() {
           <Logo dark={transparent} />
 
           <nav className="hidden items-center gap-1 lg:flex">
-            {NAV.map((item) => {
+            {navItems.map((item) => {
               const active = path === item.href || item.children?.some((c) => c.href === path);
               return (
                 <div key={item.label} className="relative" onMouseEnter={() => setOpen(item.children ? item.label : null)}>
@@ -131,7 +148,7 @@ export default function Navbar() {
 
         {/* Mega menu */}
         <AnimatePresence>
-          {open && NAV.find((n) => n.label === open)?.children && (
+          {open && navItems.find((n) => n.label === open)?.children && (
             <motion.div
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -140,7 +157,7 @@ export default function Navbar() {
               className="absolute right-0 left-0 hidden border-t border-ink/[0.06] bg-white/95 backdrop-blur-2xl lg:block"
             >
               <div className="container-x grid grid-cols-4 gap-2 py-8">
-                {NAV.find((n) => n.label === open)!.children!.map((c, i) => (
+                {navItems.find((n) => n.label === open)!.children!.map((c, i) => (
                   <motion.button
                     key={c.href}
                     initial={{ opacity: 0, y: 10 }}
@@ -187,7 +204,7 @@ export default function Navbar() {
                 </button>
               </div>
               <div className="container-x hide-scrollbar flex-1 overflow-y-auto py-8">
-                {NAV.map((item, i) => (
+                {navItems.map((item, i) => (
                   <motion.div
                     key={item.label}
                     initial={{ opacity: 0, x: -18 }}
