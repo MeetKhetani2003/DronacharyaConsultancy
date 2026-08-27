@@ -39,23 +39,47 @@ export default function ContactPage() {
                   label: "Head Office",
                   value: `${BUSINESS.addressLine1}, ${BUSINESS.addressLine2}, ${BUSINESS.addressLine3}`,
                 },
-                { Icon: Phone, label: "Phone", value: BUSINESS.phone, href: BUSINESS.phoneHref },
-                { Icon: MessageCircle, label: "WhatsApp", value: BUSINESS.phone, href: BUSINESS.whatsapp },
+                {
+                  Icon: Phone,
+                  label: "Get Instant Callback",
+                  value: "We call you at your convenience",
+                  href: BUSINESS.phoneHref,
+                  className: "bg-[#0ea5e9] text-white border-none shadow-[0_8px_30px_-12px_rgba(14,165,233,0.6)] hover:shadow-[0_12px_40px_-12px_rgba(14,165,233,0.7)]",
+                  iconContainerClass: "bg-white/20 text-white group-hover:bg-white group-hover:text-[#0ea5e9]",
+                  labelClass: "text-white/80",
+                  valueClass: "text-white text-[16px]",
+                },
+                {
+                  Icon: MessageCircle,
+                  label: "Chat on WhatsApp",
+                  value: "Chat instantly with a counselor",
+                  href: BUSINESS.whatsapp,
+                  className: "bg-[#22c55e] text-white border-none shadow-[0_8px_30px_-12px_rgba(34,197,94,0.6)] hover:shadow-[0_12px_40px_-12px_rgba(34,197,94,0.7)]",
+                  iconContainerClass: "bg-white/20 text-white group-hover:bg-white group-hover:text-[#22c55e]",
+                  labelClass: "text-white/80",
+                  valueClass: "text-white text-[16px]",
+                },
                 { Icon: Mail, label: "Email", value: BUSINESS.email, href: `mailto:${BUSINESS.email}` },
-              ].map(({ Icon, label, value, href }, i) => (
+              ].map(({ Icon, label, value, href, className, iconContainerClass, labelClass, valueClass }, i) => (
                 <Reveal key={label} delay={i * 0.07}>
                   <a
                     href={href ?? "#"}
                     target={href?.startsWith("http") ? "_blank" : undefined}
                     rel="noreferrer"
-                    className="group flex items-start gap-5 rounded-2xl border border-ink/[0.07] bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-brand/30 hover:shadow-[0_26px_60px_-34px_rgba(17,24,39,0.45)]"
+                    className={cn(
+                      "group flex items-start gap-5 rounded-2xl border border-ink/[0.07] bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-brand/30 hover:shadow-[0_26px_60px_-34px_rgba(17,24,39,0.45)]",
+                      className
+                    )}
                   >
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-mist text-accent transition-all duration-500 group-hover:bg-brand group-hover:text-white">
+                    <span className={cn(
+                      "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-mist text-accent transition-all duration-500 group-hover:bg-brand group-hover:text-white",
+                      iconContainerClass
+                    )}>
                       <Icon className="h-5 w-5" />
                     </span>
                     <span>
-                      <span className="block text-[11px] tracking-[0.18em] text-ink uppercase">{label}</span>
-                      <span className="mt-1.5 block text-[14.5px] leading-relaxed font-semibold text-ink">{value}</span>
+                      <span className={cn("block text-[11px] tracking-[0.18em] text-ink uppercase", labelClass)}>{label}</span>
+                      <span className={cn("mt-1.5 block text-[14.5px] leading-relaxed font-semibold text-ink", valueClass)}>{value}</span>
                     </span>
                   </a>
                 </Reveal>

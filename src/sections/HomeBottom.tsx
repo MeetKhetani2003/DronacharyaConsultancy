@@ -768,7 +768,7 @@ export function Faq({ compact = false }: { compact?: boolean }) {
                 <MessageCircle className="h-8 w-8 shrink-0 stroke-[1.5]" />
                 <div>
                   <p className="font-display text-[17px] font-semibold tracking-wide">Chat on WhatsApp</p>
-                  <p className="mt-1 text-[13.5px] font-medium text-white/90">Chat instantly</p>
+                  <p className="mt-1 text-[13.5px] font-medium text-white/90">Chat instantly with a counselor</p>
                 </div>
               </a>
               <a
@@ -778,17 +778,7 @@ export function Faq({ compact = false }: { compact?: boolean }) {
                 <Phone className="h-8 w-8 shrink-0 stroke-[1.5]" />
                 <div>
                   <p className="font-display text-[17px] font-semibold tracking-wide">Get Instant Callback</p>
-                  <p className="mt-1 text-[13.5px] font-medium text-white/90">We call you back</p>
-                </div>
-              </a>
-              <a
-                href="/contact"
-                className="group flex items-center gap-5 rounded-[20px] bg-[#8b5cf6] px-6 py-5 text-white shadow-[0_8px_30px_-12px_rgba(139,92,246,0.6)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_-12px_rgba(139,92,246,0.7)]"
-              >
-                <Video className="h-8 w-8 shrink-0 stroke-[1.5]" />
-                <div>
-                  <p className="font-display text-[17px] font-semibold tracking-wide">Book Video Counselling</p>
-                  <p className="mt-1 text-[13.5px] font-medium text-white/90">Face-to-face guidance</p>
+                  <p className="mt-1 text-[13.5px] font-medium text-white/90">We call you at your convenience</p>
                 </div>
               </a>
             </div>
