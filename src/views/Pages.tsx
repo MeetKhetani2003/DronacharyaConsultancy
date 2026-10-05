@@ -405,10 +405,10 @@ export function EventsPage() {
     <>
       <PageHero
         crumb="Events"
-        eyebrow="Seminars & Workshops"
+        eyebrow="Sessions & Workshops"
         title="Meet our experts in your city."
         highlight="experts"
-        sub="Join our upcoming seminars for direct interactions with university delegates and our senior counsellors."
+        sub="Join our upcoming sessions for direct interactions with university delegates and our senior counsellors."
         image={MEDIA.seminar1}
       />
       

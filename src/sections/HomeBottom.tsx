@@ -300,7 +300,7 @@ export function SuccessStories() {
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
           <SectionHead
             eyebrow="Success Stories"
-            title="Seminars, send-offs and the moments in between."
+            title="Sessions, send-offs and the moments in between."
             sub="Two decades of counselling camps, education fairs, pre-departure briefings and felicitation ceremonies across Rajasthan."
           />
           <Reveal delay={0.12}>

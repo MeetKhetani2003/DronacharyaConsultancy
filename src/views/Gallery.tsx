@@ -32,7 +32,7 @@ export default function GalleryPage({ initialItems = [] }: { initialItems?: Gall
     <>
       <PageHero
         crumb="Gallery"
-        eyebrow="Events · Seminars · Students · Press"
+        eyebrow="Events · Sessions · Students · Press"
         title="Twenty-three years, seen through our lens."
         highlight="lens"
         image={MEDIA.seminar4}

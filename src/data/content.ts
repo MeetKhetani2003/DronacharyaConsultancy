@@ -408,12 +408,12 @@ export const NEWS = [
 ];
 
 export const GALLERY = [
-  { src: MEDIA.seminar1, category: "Seminars", title: "NEET Counselling Seminar" },
+  { src: MEDIA.seminar1, category: "Sessions", title: "NEET Counselling Session" },
   { src: MEDIA.counselling, category: "Admissions", title: "Admission Desk Session" },
   { src: MEDIA.gradToss, category: "Achievements", title: "Graduation Celebration" },
   { src: MEDIA.newspaper1, category: "Newspapers", title: "Press Coverage" },
   { src: MEDIA.campusWalk, category: "Students", title: "Campus Life" },
-  { src: MEDIA.seminar2, category: "Seminars", title: "Education Fair" },
+  { src: MEDIA.seminar2, category: "Sessions", title: "Education Fair" },
   { src: MEDIA.labStudent, category: "Students", title: "Laboratory Training" },
   { src: MEDIA.seminar4, category: "Events", title: "Annual Student Meet" },
   { src: MEDIA.counselling2, category: "Admissions", title: "Documentation Support" },
@@ -424,17 +424,17 @@ export const GALLERY = [
   { src: MEDIA.labMicroscopes, category: "Students", title: "Anatomy & Pathology Labs" },
   { src: MEDIA.counselling3, category: "Admissions", title: "Parent Counselling" },
   { src: MEDIA.gradJoy, category: "Achievements", title: "Doctors of Tomorrow" },
-  { src: MEDIA.seminar5, category: "Seminars", title: "Career Guidance Session" },
+  { src: MEDIA.seminar5, category: "Sessions", title: "Career Guidance Session" },
   { src: MEDIA.newspaper3, category: "Newspapers", title: "Counselling Camp Report" },
   { src: MEDIA.seminar6, category: "Events", title: "Pre-Departure Briefing" },
   { src: MEDIA.campusGroup, category: "Students", title: "Send-off Ceremony" },
   { src: MEDIA.counselling4, category: "Admissions", title: "Visa Filing Support" },
 
-  { src: MEDIA.seminar7, category: "Seminars", title: "Medical Education Summit" },
+  { src: MEDIA.seminar7, category: "Sessions", title: "Medical Education Summit" },
   { src: MEDIA.gradBW, category: "Achievements", title: "Alumni Convocation" },
 ];
 
-export const GALLERY_CATEGORIES = ["All", "Events", "Seminars", "Students", "Admissions", "Achievements", "Newspapers"];
+export const GALLERY_CATEGORIES = ["All", "Events", "Sessions", "Students", "Admissions", "Achievements", "Newspapers"];
 
 export const FAQS = [
   {
@@ -480,9 +480,9 @@ export const NAV: { label: string; href: string; children?: { label: string; hre
     children: [
       { label: "MBBS", href: "/mbbs-india", desc: "Government, private & deemed" },
       { label: "MBBS Abroad", href: "/mbbs-abroad", desc: "NMC-recognised universities" },
-      { label: "MBA", href: "#", desc: "Top management colleges" },
-      { label: "B.Tech", href: "#", desc: "Engineering & Technology" },
-      { label: "BBA", href: "#", desc: "Business Administration" },
+      { label: "MBA", href: "/courses/btech", desc: "Top management colleges" },
+      { label: "B.Tech", href: "/courses/btech", desc: "Engineering & Technology" },
+      { label: "BBA", href: "/courses/btech", desc: "Business Administration" },
       { label: "Other Healthcare Courses", href: "#", desc: "Allied medical courses" },
     ],
   },
