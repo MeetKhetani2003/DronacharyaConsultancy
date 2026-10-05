@@ -480,9 +480,9 @@ export const NAV: { label: string; href: string; children?: { label: string; hre
     children: [
       { label: "MBBS", href: "/mbbs-india", desc: "Government, private & deemed" },
       { label: "MBBS Abroad", href: "/mbbs-abroad", desc: "NMC-recognised universities" },
-      { label: "MBA", href: "/courses/btech", desc: "Top management colleges" },
-      { label: "B.Tech", href: "/courses/btech", desc: "Engineering & Technology" },
-      { label: "BBA", href: "/courses/btech", desc: "Business Administration" },
+      { label: "MBA", href: "/courses/b-tech", desc: "Top management colleges" },
+      { label: "B.Tech", href: "/courses/b-tech", desc: "Engineering & Technology" },
+      { label: "BBA", href: "/courses/b-tech", desc: "Business Administration" },
       { label: "Other Healthcare Courses", href: "#", desc: "Allied medical courses" },
     ],
   },
